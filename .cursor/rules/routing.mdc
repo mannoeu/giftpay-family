@@ -1,0 +1,56 @@
+---
+description: Roteamento e telas com expo-router (src/app)
+globs: src/app/**
+alwaysApply: false
+---
+
+# Roteamento — expo-router (file-based)
+
+As telas vivem em `src/app/`. O nome do arquivo é a rota. App full mobile — **sem web**.
+
+## Estrutura
+
+- Grupos: `(public)/` (login, sign-up) e `(private)/` (tabs: home). Parênteses = grupo sem segmento na URL.
+- `_layout.jsx` define o navegador do nível (`Stack`, `Tabs`). O `_layout.jsx` raiz monta providers, tema (`ThemeProvider`) e o **guard de auth** (redireciona por `(public)`/`(private)` conforme `useAuthStore`).
+- Rotas dinâmicas: `[param].jsx` → leia com `useLocalSearchParams()`.
+- `index.jsx` de um grupo/pasta = rota raiz daquele nível.
+
+## Grupos de rota atuais
+
+```
+src/app/
+├── _layout.jsx          ← Root: ThemeProvider, auth guard, fontes Outfit
+├── index.jsx            ← Redirect → /(public)/login
+├── camera.jsx           ← Tela full-screen de câmera
+├── (public)/
+│   ├── _layout.jsx
+│   ├── login.jsx
+│   └── sign-up/
+│       ├── _layout.jsx
+│       └── index.jsx
+└── (private)/
+    ├── _layout.jsx      ← Tabs com TabBar custom
+    └── home/
+        ├── _layout.jsx
+        └── index.jsx
+```
+
+## Navegação
+
+Use a API do expo-router — nunca strings de navegação de outra lib:
+
+```jsx
+import { router, Link, useLocalSearchParams } from "expo-router";
+
+router.push("/(private)/home");
+router.replace("/(public)/login");
+<Link href="/(private)/home">...</Link>;
+const { id } = useLocalSearchParams();
+```
+
+## Telas
+
+- Tela nova = novo arquivo dentro do grupo/stack certo (declare no `_layout.jsx` quando o navegador lista as `Stack.Screen`).
+- A tela consome **hooks** de `queries/`/`mutations/` — nada de `api`/axios direto.
+- Textos em pt-BR hardcoded (padrão do repo). Estilos de tela em `@/styles/<tela>` ou styled-components locais.
+- Respeite safe area/insets e teclado; considere back button do Android em fluxos com passos.

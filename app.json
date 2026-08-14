@@ -1,0 +1,114 @@
+{
+  "expo": {
+    "name": "GiftPay Family",
+    "slug": "giftpay-family",
+    "owner": "giftpay",
+    "scheme": "giftpay-family",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "icon": "./src/assets/icons/app-icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "buildNumber": "1",
+      "bundleIdentifier": "com.giftpay.giftpayfamily",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSLocationWhenInUseUsageDescription": "$(PRODUCT_NAME) precisa acessar sua localização enquanto o app estiver em uso.",
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      },
+      "entitlements": {
+        "aps-environment": "production"
+      }
+    },
+    "android": {
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/icons/adaptive-icon.png",
+        "monochromeImage": "./src/assets/icons/adaptive-icon.png",
+        "backgroundColor": "#F6F5F0"
+      },
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.giftpay.giftpay_family"
+    },
+    "plugins": [
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "production"
+        }
+      ],
+      [
+        "expo-router",
+        {}
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/assets/icons/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#F6F5F0"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "$(PRODUCT_NAME) precisa acessar a câmera para que você possa tirar uma foto.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "$(PRODUCT_NAME) precisa acessar suas fotos para que você possa escolher uma imagem da galeria."
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/outfit/Outfit-Light.ttf",
+            "./src/assets/fonts/outfit/Outfit-Regular.ttf",
+            "./src/assets/fonts/outfit/Outfit-SemiBold.ttf",
+            "./src/assets/fonts/outfit/Outfit-Bold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-navigation-bar",
+        {
+          "enforceContrast": false,
+          "visibility": "visible"
+        }
+      ],
+      "expo-secure-store",
+      "expo-localization"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "93f50a85-d87d-4a58-ba89-83e93bb07740"
+      },
+      "bugsnag": {
+        "apiKey": "035de8267252988618f783e4af9e7eb2"
+      },
+      "onesignal": {
+        "appId": "113a2908-4867-4566-a4e6-12df1846f785"
+      }
+    }
+  }
+}

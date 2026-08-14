@@ -1,0 +1,41 @@
+---
+description: UI — componentes próprios, styled-components, tema, ícones lucide
+globs: src/components/**,src/styles/**/*.js,src/theme/**
+alwaysApply: false
+---
+
+# UI & componentes
+
+## Design system próprio (`src/components/ui/*`)
+
+Reutilize as primitivas do repo antes de criar UI nova: `Button`, `Input`, `InputPassword`, `Text`, `Checkbox`, `CodeInput`. Elas seguem estilo shadcn-like com props `variant`/`size`.
+
+## Pasta-por-componente
+
+`ComponentName/index.jsx` (JSX) + `ComponentName/styles.js` (styled-components). Primitivas simples podem ser arquivo flat (`ui/text.js`). Importe estilos como `import * as S from "./styles"`.
+
+```jsx
+import { useTheme } from "styled-components/native";
+import * as S from "./styles";
+
+export const Foo = ({ variant, ...rest }) => {
+  const theme = useTheme();
+  return <S.Container variant={variant} {...rest} />;
+};
+```
+
+## Estilo — `styled-components/native` (dominante)
+
+Use `styled-components/native` + tokens do `theme` (`theme.colors.*`, `theme.fontSize.*`, `theme.borderRadius.*`). Tokens de cor são nomeados pela aparência visual: `teal`, `tealDeep`, `mint`, `terracotta`, `gold`, `cream`, `charcoal`, `stone`. Estilos de **layout de tela** ficam em `src/styles/<tela>.js` (`import * as S from "@/styles/<tela>"`). `StyleSheet` só em casos pontuais — prefira styled-components.
+
+## Tema
+
+Tokens em `src/theme/` (`index.js` = fontSize/borderRadius + `colors`; `colors.js` = paleta light-only). Aplicado no `_layout.jsx` raiz via `ThemeProvider`. Acesse cores com `useTheme()` (JS) ou `${({ theme }) => theme.colors.x}` (styled). **Sem dark mode.**
+
+## Ícones
+
+`lucide-react-native` (`import { ChevronLeft } from "lucide-react-native"`). `@expo/vector-icons` só onde já usado. Passe `size`/`color` (ex.: cor do tema).
+
+## Sheets / modais
+
+Bottom sheets via `@gorhom/bottom-sheet` orquestradas pela store `@/store/sheet` (`useSheet` → `openSheet(<XSheet />)` / `closeSheet()`). Não monte modal ad-hoc quando o padrão de sheet serve.

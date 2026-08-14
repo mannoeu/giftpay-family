@@ -1,0 +1,70 @@
+---
+description: Camada de rede — controllers, queries, mutations, services (react-query + axios)
+globs: src/controller/**/*.js,src/queries/**/*.js,src/mutations/**/*.js,src/services/**/*.js
+alwaysApply: false
+---
+
+# Camada de rede
+
+## Controllers (`src/controller/<dominio>.controller.js`)
+
+Função fina sobre o axios (`@/services/api`). Retorna a forma axios; deixa o erro propagar pro interceptor. Registre no barrel `controller/index.js`.
+
+```js
+import { api } from "@/services/api";
+
+export const getFoo = ({ id }) => api.get(`/main/foo/${id}`);
+export const createFoo = ({ data }) => api.post(`/main/foo`, data);
+```
+
+- Paginação: use `convertPageToOffset` de `@/sdk/api` (não confunda `sdk/api.js` com o cliente `services/api.js`).
+- Para suprimir o toast automático de erro, passe `headers: { silent: true }`.
+- **Não** faça `try/catch` que engole o erro (some do interceptor).
+
+## Queries (`src/queries/<dominio>.js`)
+
+Hook `useQuery`/`useInfiniteQuery` que chama o controller, desembrulha `data`, e expõe `isReady`.
+
+```js
+import { useQuery } from "@tanstack/react-query";
+import { FooController } from "@/controller";
+import { QueryKeys, Time } from "./@config";
+
+export const useFooQuery = ({ id, ...options } = {}) => {
+  const Query = useQuery({
+    enabled: !!id,
+    queryKey: [QueryKeys.getFoo, { id }],
+    queryFn: async () => (await FooController.getFoo({ id })).data,
+    staleTime: Time(5),
+    ...options,
+  });
+  const isReady = !(Query.errorUpdateCount > 0 || !Query.isFetched || Query.isError);
+  return { ...Query, isReady };
+};
+```
+
+Query key nova → adicione em `src/queries/@config.js` (`QueryKeys`). Nunca string inline.
+
+## Mutations (`src/mutations/<acao>.js`)
+
+Factory que devolve o objeto `useMutation`. O hook segura só efeitos sempre-on (toast de sucesso, invalidação); o consumidor passa callbacks no `mutate()`.
+
+```js
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { FooController } from "@/controller";
+import { QueryKeys } from "@/queries/@config";
+import { ToastSuccess } from "@/sdk/toast";
+
+export const createFoo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ data }) => FooController.createFoo({ data }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.getFoo] });
+      ToastSuccess("Tudo certo!");
+    },
+  });
+};
+```
+
+No componente: `mutate(vars, { onSuccess, onError })`. No `onError`, use `error.feedback?.dispatch()` ou trate status específico. **Nunca `mutateAsync` + try/catch.**

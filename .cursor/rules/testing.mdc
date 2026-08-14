@@ -1,0 +1,36 @@
+---
+description: Testes — Jest + Testing Library, teste a lógica não o render
+globs: src/**/*.test.js,src/**/*.test.jsx,src/test/**
+alwaysApply: false
+---
+
+# Testes
+
+Stack: **Jest** (preset `jest-expo`) + `@testing-library/react-native`. Testes colocados como `*.test.js` ao lado do código. Toda lógica nova/tocada deve ter teste; 80% de cobertura é alvo aspiracional (sem gate rígido hoje).
+
+## Teste a lógica, não o render
+
+- **Schema zod** → `safeParse(...)`, asserta `success` e a mensagem.
+- **Validator/util puro** (`@/sdk/validator`, `@/sdk/formatter`) → chame direto.
+- **Action de store zustand** → `useFooStore.getState().acao()` e asserta o estado; `reset()` no fim.
+- **Hook react-query** → `renderHook` dentro de `QueryClientProvider` com `createTestQueryClient()` de `@/test/queryClient`. **Nunca `new QueryClient()` inline** (vaza o timer de GC e segura o worker do Jest).
+- **Controller** → `jest.mock("@/services/api")`, asserta URL/body e o passthrough do `data`.
+- Renderize um componente **só** quando o comportamento vive mesmo nele.
+
+## Mock só a fronteira externa
+
+Mocke **apenas** `@/services/api` (a instância axios) e libs nativas (câmera, network, etc.). **Nunca** mocke a unidade sob teste, nem asserte que um mock foi chamado em vez do efeito real.
+
+```js
+import { api } from "@/services/api";
+jest.mock("@/services/api", () => ({ api: { get: jest.fn(), post: jest.fn() } }));
+
+it("GET /main/foo/:id", async () => {
+  api.get.mockResolvedValueOnce({ data: { id: 1 } });
+  const res = await getFoo({ id: 1 });
+  expect(api.get).toHaveBeenCalledWith("/main/foo/1");
+  expect(res.data).toEqual({ id: 1 });
+});
+```
+
+Rode um arquivo: `npx jest src/.../file.test.js`. Suíte inteira antes de "pronto": `npm test`. Ver a skill `tdd` para o ciclo RED → GREEN → REFACTOR.

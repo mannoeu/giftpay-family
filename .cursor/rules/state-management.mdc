@@ -1,0 +1,41 @@
+---
+description: Estado — zustand (feature/UI) e Context (cross-cutting)
+globs: src/store/**/*.js,src/context/**/*.jsx
+alwaysApply: false
+---
+
+# Estado
+
+Regra prática: dado do backend → **react-query** (nunca duplique num store). Estado de feature/UI (seleção, passos, sheets abertas) → **zustand**. Cross-cutting de wizard multi-step → **Context**.
+
+## Zustand (`src/store/<dominio>.js`)
+
+Padrão do repo: `create` + `immer` (mutação "direta" via draft). Persistência opcional com `persist` + `createJSONStorage(() => Storage)` onde `Storage` é `@/sdk/storage`. Nome da chave: `@giftpay-family/<nome>`.
+
+```js
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
+import { Storage } from "@/sdk/storage";
+
+export const useFooStore = create(
+  persist(
+    immer((set) => ({
+      value: null,
+      setValue: (value) => set((state) => { state.value = value; }),
+      reset: () => set((state) => { state.value = null; }),
+    })),
+    { name: "@giftpay-family/foo", storage: createJSONStorage(() => Storage) }
+  )
+);
+```
+
+Store sem persistência: só `create(immer((set) => ({ ... })))`.
+
+- Selecione fatias no consumo (`useFooStore((s) => s.value)`) para evitar re-render.
+- Ao dar `signOut`/logout, limpe o que for sensível.
+- **Sem store de tema** — o app é sempre light, sem alternância.
+
+## Context (`src/context/*.jsx`)
+
+Use **apenas** para fluxos multi-step locais. Memoize o `value` do Provider para não re-renderizar todos os consumidores. Para estado global de UI que não é wizard, prefira zustand.

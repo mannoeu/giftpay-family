@@ -1,0 +1,54 @@
+---
+description: Formulários (react-hook-form) e validação (zod) — mensagens pt-BR
+globs: src/zodSchemes/**/*.js,src/app/**/*.jsx
+alwaysApply: false
+---
+
+# Formulários & validação
+
+## Zod (`src/zodSchemes/index.js` ou junto da feature)
+
+Toda validação mora no schema zod. As mensagens são **strings pt-BR** — siga o padrão do repo. Reutilize os schemes factory já existentes (`cpfScheme()`, `passwordScheme()`, `emailScheme()`, `phoneScheme()`, `nameScheme()`, `confirmationCodeScheme()`, `birthDateSchema()`).
+
+- Predicados puros ficam em `@/sdk/validator`; o schema só importa e compõe. **Não** deixe regex/`if` soltos inline quando já há predicado.
+- Campo independente → chain do próprio campo (`.min`, `.refine(predicado, { message })`).
+- Regra composta / entre campos → `.superRefine((value, ctx) => ctx.addIssue({ code: z.ZodIssueCode.custom, message }))`.
+
+## react-hook-form (nas telas em `src/app/`)
+
+`useForm({ resolver: zodResolver(schema), defaultValues })` + `Controller` por campo. Exiba `errors.<campo>?.message` (já é a string pt-BR). No submit, chame `mutate()` da mutation.
+
+```jsx
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Input, InputPassword } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { cpfScheme, passwordScheme } from "@/zodSchemes";
+
+const formScheme = z.object({ cpf: cpfScheme(), password: passwordScheme() });
+
+export const FooForm = () => {
+  const { mutate, isPending } = someMutation();
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(formScheme),
+    defaultValues: { cpf: "", password: "" },
+  });
+
+  const onSubmit = (values) => {
+    if (isPending) return;
+    mutate({ username: values.cpf.replace(/\D/g, ""), password: values.password });
+  };
+
+  return (
+    <Controller
+      control={control}
+      name="cpf"
+      render={({ field: { value, onChange } }) => (
+        <Input value={value} onChangeText={onChange} placeholder="CPF" />
+      )}
+    />
+    // errors.cpf?.message → string pt-BR do schema
+  );
+};
+```

@@ -1,0 +1,37 @@
+---
+description: Arquitetura central e convenções inegociáveis do giftpay-family (React Native + Expo)
+alwaysApply: true
+---
+
+# giftpay-family — regras centrais
+
+App **React Native + Expo (expo-router)**, **JavaScript**, idioma **pt-BR** (textos hardcoded). Full mobile (Android + iOS) — **sem web**. Detalhe completo em `AGENTS.md` e na skill `project-architecture`.
+
+## Camadas de rede (a regra de ouro)
+
+Componentes/telas **NUNCA** chamam `api`/axios direto. Fluxo:
+
+```
+controller/*  →  queries/* (leitura) + mutations/* (escrita)  →  tela (app/) ou componente
+```
+
+- Chamada HTTP → `src/controller/<dominio>.controller.js` (+ export em `controller/index.js`).
+- Leitura → hook em `src/queries/*`; escrita → hook em `src/mutations/*`.
+- Query key → constante em `src/queries/@config.js` (`QueryKeys`), **array** quando há argumento.
+
+## Inegociáveis
+
+- **Mutations via `mutate(vars, { onSuccess, onError })`** — callbacks por chamada. **Nunca `mutateAsync` + try/catch**; encadeie no `onSuccess`.
+- **Nenhuma query key inline** — sempre no enum `queries/@config.js`.
+- **Nenhuma chamada `api.*`/axios** fora de `controller/*`.
+- **Validação em zod** (`@/zodSchemes` ou junto da feature); mensagens em pt-BR (padrão do repo).
+- **UI**: reutilize primitivas de `@/components/ui/*`; estilo com `styled-components/native` + tokens do `theme`; ícones `lucide-react-native`.
+- **Import por alias `@/*`** — nunca `../../` quando o alias resolve.
+- **Navegação**: expo-router (`router.push/replace`, `<Link>`, `useLocalSearchParams`); tela nova = arquivo em `src/app/...`.
+- **Estado**: servidor → react-query; feature/UI → zustand; cross-cutting → Context.
+- **Env**: `process.env.EXPO_PUBLIC_*`.
+- **Chaves de storage**: `@giftpay-family/<nome>`.
+
+## Antes de criar arquivo
+
+Ache o vizinho que já faz algo parecido e imite-o. Se estiver planejando/implementando, leia a skill `project-architecture`; para implementar, siga `tdd` (teste primeiro).

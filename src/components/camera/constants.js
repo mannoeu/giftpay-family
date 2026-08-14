@@ -1,0 +1,5 @@
+export const BUTTON_DISABLED_OPACITY = 0.4;
+export const CONTENT_SPACING = 15;
+export const CONTROL_BUTTON_SIZE = 40;
+export const CAPTURE_BUTTON_SIZE = 78;
+export const BORDER_WIDTH = CAPTURE_BUTTON_SIZE * 0.1;

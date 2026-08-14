@@ -1,0 +1,15 @@
+export const colors = {
+  teal: "#2B6E61",
+  tealDeep: "#1F4E46",
+  mint: "#E1EDEA",
+  terracotta: "#C86042",
+  gold: "#BB822E",
+  cream: "#F6F5F0",
+  charcoal: "#202020",
+  stone: "#6F6F6F",
+  white: "#FFFFFF",
+  black: "#000000",
+  danger: "#b0030d",
+  green_600: "#2B6E61",
+  red_600: "#b0030d",
+};
