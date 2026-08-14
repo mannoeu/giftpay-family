@@ -15,9 +15,7 @@ export const Checkbox = ({ onChange, checked, label }) => {
     >
       <S.Container>
         <S.CheckboxComponent onValueChange={onChange} value={checked} />
-        {label && (
-          <Text style={{ userSelect: "none" }}>{label}</Text>
-        )}
+        {label && <Text style={{ userSelect: "none" }}>{label}</Text>}
       </S.Container>
     </TouchableWithoutFeedback>
   );

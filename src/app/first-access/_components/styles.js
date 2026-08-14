@@ -1,13 +1,12 @@
 import styled from "styled-components/native";
 import { DEFAULT_PADDING } from "@/components/layout-constants";
-import { Input } from "@/components/ui/input";
 
 export const Container = styled.ScrollView.attrs(({ theme }) => ({
   keyboardShouldPersistTaps: "handled",
   alwaysBounceVertical: false,
   contentContainerStyle: {
     flexGrow: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.cream,
     paddingHorizontal: DEFAULT_PADDING,
     paddingVertical: 24,
     gap: 24,
@@ -24,9 +23,9 @@ export const Brand = styled.View`
 `;
 
 export const LogoMark = styled.View`
-  width: 40px;
-  height: 40px;
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.teal};
   align-items: center;
   justify-content: center;
@@ -55,10 +54,6 @@ export const Form = styled.View`
   width: 100%;
 `;
 
-export const PasswordInput = styled(Input)`
-  background-color: ${({ theme }) => theme.colors.white};
-`;
-
 export const Rules = styled.View`
   flex-direction: column;
   gap: 10px;
@@ -67,13 +62,13 @@ export const Rules = styled.View`
 export const RuleRow = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 `;
 
 export const RuleDot = styled.View`
-  width: 18px;
-  height: 18px;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
   background-color: ${({ theme, met }) =>
     met ? theme.colors.teal : theme.colors.opacity(theme.colors.stone, 28)};
   align-items: center;

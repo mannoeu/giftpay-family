@@ -11,8 +11,12 @@ export const Container = styled.View`
 export const CheckboxComponent = styled(ExpoCheckbox).attrs(
   ({ value, theme }) => ({
     color: value ? theme.colors.teal : undefined,
-  })
+  }),
 )`
-  width: ${({ theme }) => theme.fontSize.base};
-  height: ${({ theme }) => theme.fontSize.base};
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-color: ${({ theme }) => theme.colors.mint};
+  border-width: 1px;
+  width: 20px;
+  height: 20px;
 `;

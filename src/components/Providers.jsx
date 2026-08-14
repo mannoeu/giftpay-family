@@ -43,7 +43,7 @@ export const Providers = ({ children }) => {
       <GestureHandlerRootView
         style={{
           flex: 1,
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.cream,
         }}
       >
         <StatusBar style="dark" />

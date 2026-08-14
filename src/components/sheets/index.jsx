@@ -48,17 +48,17 @@ export const SheetRoot = () => {
           <View style={[style, { backgroundColor: "rgba(0, 0, 0, 0.85)" }]} />
         )}
         backgroundComponent={({ style }) => (
-          <View style={[style, { backgroundColor: theme.colors.background }]} />
+          <View style={[style, { backgroundColor: theme.colors.cream }]} />
         )}
         handleIndicatorStyle={{
-          backgroundColor: theme.colors.input,
+          backgroundColor: theme.colors.mint,
           marginTop: 8,
         }}
         handleStyle={{
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.cream,
         }}
         style={{
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.cream,
         }}
       >
         <BottomSheetScrollView
@@ -69,7 +69,7 @@ export const SheetRoot = () => {
             paddingHorizontal: DEFAULT_PADDING,
             paddingTop: DEFAULT_PADDING / 2,
             paddingBottom: insets.bottom + DEFAULT_PADDING,
-            backgroundColor: theme.colors.background,
+            backgroundColor: theme.colors.cream,
           }}
         >
           <View

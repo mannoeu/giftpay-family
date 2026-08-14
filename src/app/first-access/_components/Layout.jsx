@@ -13,7 +13,7 @@ export const Layout = ({ children }) => {
   return (
     <SafeAreaView
       initialMetrics={initialWindowMetrics}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{ flex: 1, backgroundColor: theme.colors.cream }}
     >
       <KeyboardAvoidingView>
         <S.Container>{children}</S.Container>

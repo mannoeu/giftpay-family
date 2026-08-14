@@ -115,7 +115,7 @@ function AppLayout() {
           screenOptions={{
             headerShown: false,
             contentStyle: {
-              backgroundColor: theme.colors.background,
+              backgroundColor: theme.colors.cream,
             },
           }}
         >

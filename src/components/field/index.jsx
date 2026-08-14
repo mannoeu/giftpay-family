@@ -10,14 +10,14 @@ export const Field = ({ label, error, description, component }) => {
     <S.Container>
       {label && <Text fontWeight="bold">{label}</Text>}
       {component}
-      {error && (
-        <Text fontSize="sm" color={theme.colors.red_600}>
-          {error}
+      {description && (
+        <Text fontSize="sm" color={theme.colors.stone}>
+          {description}
         </Text>
       )}
-      {description && (
-        <Text fontSize="xs" color={theme.colors.mutedForeground}>
-          {description}
+      {error && (
+        <Text fontSize="sm" color={theme.colors.danger}>
+          {error}
         </Text>
       )}
     </S.Container>

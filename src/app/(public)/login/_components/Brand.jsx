@@ -20,13 +20,15 @@ export const Brand = () => {
           Família
         </Text>
       </S.Title>
-      <Text
-        fontSize="sm"
-        color={theme.colors.mutedForeground}
-        textAlign="center"
-      >
-        O cartão dos seus filhos, sob o seu controle.
-      </Text>
+      <S.Description>
+        <Text
+          fontSize="md"
+          color={theme.colors.stone}
+          textAlign="center"
+        >
+          O cartão dos seus filhos, sob o seu controle.
+        </Text>
+      </S.Description>
     </S.Brand>
   );
 };

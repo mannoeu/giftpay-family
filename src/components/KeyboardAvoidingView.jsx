@@ -9,7 +9,7 @@ export const KeyboardAvoidingView = ({ children }) => {
 
   return (
     <RNKeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{ flex: 1, backgroundColor: theme.colors.cream }}
       behavior={Platform.OS === "ios" ? "padding" : null}
       keyboardVerticalOffset={48}
     >

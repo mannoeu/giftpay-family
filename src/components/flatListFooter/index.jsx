@@ -9,7 +9,7 @@ export const FlatListFooter = ({ isLoading = false }) => {
   return (
     <S.Container>
       {isLoading && (
-        <ActivityIndicator size="large" color={theme.colors.primarySystem} />
+        <ActivityIndicator size="large" color={theme.colors.teal} />
       )}
     </S.Container>
   );

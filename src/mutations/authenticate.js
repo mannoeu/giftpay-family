@@ -13,7 +13,7 @@ export const authenticate = () => {
       setToken({
         access_token: data?.access,
         refresh_token: data?.refresh,
-        isFirstAccess: true, //!!data?.is_first_access,
+        isFirstAccess: !!data?.is_first_access,
       });
     },
   });

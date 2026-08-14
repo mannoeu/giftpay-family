@@ -62,7 +62,7 @@ export const TabBar = ({ state, descriptors, navigation }) => {
           left: 0,
           right: 0,
           zIndex: 10,
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.cream,
           height: TOTAL_HEIGHT,
         },
         animatedStyle,
@@ -110,8 +110,8 @@ export const TabBar = ({ state, descriptors, navigation }) => {
               routeName={route.name}
               color={
                 isFocused
-                  ? theme.colors.primarySystem
-                  : theme.colors.mutedForeground
+                  ? theme.colors.teal
+                  : theme.colors.stone
               }
               label={label}
               badge={options?.badge}

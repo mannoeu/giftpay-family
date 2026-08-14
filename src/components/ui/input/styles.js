@@ -3,39 +3,42 @@ import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 
 const sharedInputStyles = css`
   display: flex;
-  height: ${({ multiline }) => (multiline ? "auto" : "48px")};
-  min-height: ${({ multiline }) => (multiline ? "120px" : "48px")};
+  height: ${({ multiline }) => (multiline ? "auto" : "58px")};
+  min-height: ${({ multiline }) => (multiline ? "120px" : "58px")};
   width: 100%;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  background-color: transparent;
-  padding: ${({ multiline }) => (multiline ? "12px" : "4px 12px")};
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: ${({ multiline }) => (multiline ? "14px" : "4px 14px")};
   font-size: ${({ theme }) => theme.fontSize.base};
   border: 1px
     ${({ theme, focused, editable }) =>
       [
         editable ? "solid" : "dashed",
-        focused ? theme.colors.ring : theme.colors.border,
+        focused ? theme.colors.teal : theme.colors.mint,
       ].join(" ")};
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
+  transition:
+    color 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
   color: ${({ theme, editable }) =>
-    editable ? theme.colors.foreground : theme.colors.mutedForeground};
+    editable ? theme.colors.charcoal : theme.colors.stone};
 
   ::placeholder {
-    color: ${({ theme }) => theme.colors.mutedForeground};
+    color: ${({ theme }) => theme.colors.stone};
   }
 `;
 
 export const Input = styled.TextInput.attrs(({ theme }) => ({
-  placeholderTextColor: theme.colors.mutedForeground,
+  placeholderTextColor: theme.colors.stone,
 }))`
   ${sharedInputStyles}
 `;
 
 export const BottomSheetInput = styled(BottomSheetTextInput).attrs(
   ({ theme }) => ({
-    placeholderTextColor: theme.colors.mutedForeground,
-  })
+    placeholderTextColor: theme.colors.stone,
+  }),
 )`
   ${sharedInputStyles}
 `;

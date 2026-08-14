@@ -16,7 +16,7 @@ const PasswordRule = ({ met, label }) => {
           <Check size={10} color={theme.colors.white} strokeWidth={3} />
         ) : null}
       </S.RuleDot>
-      <Text fontSize="sm" color={theme.colors.mutedForeground}>
+      <Text fontSize="sm" color={theme.colors.stone}>
         {label}
       </Text>
     </S.RuleRow>

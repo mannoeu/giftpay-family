@@ -1,10 +1,12 @@
 import { Keyboard } from "react-native";
+import { Fragment } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { changePassword } from "@/mutations/changePassword";
 import { Field } from "@/components/field";
 import { Button } from "@/components/ui/button";
+import { InputPassword } from "@/components/ui/input";
 import { firstAccessFormScheme } from "@/zodSchemes";
 import { PasswordRules } from "./PasswordRules";
 import * as S from "./styles";
@@ -22,7 +24,6 @@ export const Form = () => {
     resolver: zodResolver(formScheme),
     defaultValues: {
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -33,7 +34,7 @@ export const Form = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <S.Form>
         <Field
           component={
@@ -41,9 +42,8 @@ export const Form = () => {
               name="password"
               control={control}
               render={({ field }) => (
-                <S.PasswordInput
+                <InputPassword
                   placeholder="Nova senha"
-                  secureTextEntry
                   autoCapitalize="none"
                   textContentType="newPassword"
                   autoComplete="password-new"
@@ -55,32 +55,6 @@ export const Form = () => {
             />
           }
           error={errors.password && errors.password.message}
-        />
-        <Field
-          component={
-            <Controller
-              name="confirmPassword"
-              control={control}
-              render={({ field }) => (
-                <S.PasswordInput
-                  placeholder="Confirmar nova senha"
-                  secureTextEntry
-                  autoCapitalize="none"
-                  textContentType="newPassword"
-                  autoComplete="password-new"
-                  onBlur={field.onBlur}
-                  onChangeText={field.onChange}
-                  value={field.value}
-                  onKeyPress={(event) => {
-                    if (event.nativeEvent.key === "Enter") {
-                      handleSubmit(onSubmit)();
-                    }
-                  }}
-                />
-              )}
-            />
-          }
-          error={errors.confirmPassword && errors.confirmPassword.message}
         />
       </S.Form>
 
@@ -96,6 +70,6 @@ export const Form = () => {
           Salvar e continuar
         </Button>
       </S.Actions>
-    </>
+    </Fragment>
   );
 };

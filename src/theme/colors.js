@@ -7,9 +7,10 @@ export const colors = {
   cream: "#F6F5F0",
   charcoal: "#202020",
   stone: "#6F6F6F",
+  grey: "#A3A3A3",
   white: "#FFFFFF",
   black: "#000000",
   danger: "#b0030d",
+  danger_border: "#F3E1E3",
   green_600: "#2B6E61",
-  red_600: "#b0030d",
 };

@@ -7,7 +7,7 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
   contentContainerStyle: {
     flexGrow: 1,
     justifyContent: "center",
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.cream,
     paddingHorizontal: DEFAULT_PADDING,
     paddingVertical: 32,
     gap: 32,
@@ -22,10 +22,15 @@ export const Brand = styled.View`
   gap: 12px;
 `;
 
+export const Description = styled.View`
+  max-width: 214px;
+  margin: 0 auto;
+`;
+
 export const LogoMark = styled.View`
   width: 56px;
   height: 56px;
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.teal};
   align-items: center;
   justify-content: center;
@@ -40,8 +45,12 @@ export const Title = styled.View`
 
 export const Form = styled.View`
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
+`;
+
+export const Actions = styled.View`
+  margin-top: 16px;
 `;
 
 export const Support = styled.View`

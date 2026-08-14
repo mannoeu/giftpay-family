@@ -24,8 +24,8 @@ export const Text = styled.Text`
     return decorations[decoration] || "none";
   }};
   text-decoration-color: ${({ theme, color }) =>
-    color || theme.colors.foreground};
-  color: ${({ theme, color }) => color || theme.colors.foreground};
+    color || theme.colors.charcoal};
+  color: ${({ theme, color }) => color || theme.colors.charcoal};
   flex-wrap: wrap;
   text-transform: ${({ textTransform }) => textTransform || "none"};
   text-align: ${({ textAlign }) => textAlign || "start"};

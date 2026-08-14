@@ -19,7 +19,7 @@ export default function PrivateLayout() {
       initialMetrics={initialWindowMetrics}
       style={{
         flex: 1,
-        backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.cream,
       }}
     >
       <Tabs
@@ -29,7 +29,7 @@ export default function PrivateLayout() {
           headerShown: false,
           animation: "none",
           sceneStyle: {
-            backgroundColor: theme.colors.background,
+            backgroundColor: theme.colors.cream,
           },
         }}
       >

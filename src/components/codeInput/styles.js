@@ -20,9 +20,9 @@ export const Cell = styled.View`
   height: 50px;
   border-width: 1px;
   border-color: ${({ $focused, theme }) =>
-    $focused ? theme.colors.primarySystem : theme.colors.border};
+    $focused ? theme.colors.teal : theme.colors.mint};
   border-style: ${({ $disabled }) => ($disabled ? "dashed" : "solid")};
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.cream};
   border-radius: 8px;
   justify-content: center;
   align-items: center;

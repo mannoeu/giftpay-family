@@ -10,14 +10,14 @@ export function FlatListEmpty({ image, title, subtitle, children, ...rest }) {
 
   return (
     <S.Container {...rest}>
-      <SearchIcon color={theme.colors.mutedForeground} size={32} />
+      <SearchIcon color={theme.colors.stone} size={32} />
       <Text fontWeight="bold" fontSize="md" textAlign="center">
         {title}
       </Text>
       <Text
         fontSize="sm"
         textAlign="center"
-        color={theme.colors.mutedForeground}
+        color={theme.colors.stone}
       >
         {subtitle}
       </Text>

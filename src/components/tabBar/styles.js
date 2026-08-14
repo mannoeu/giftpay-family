@@ -9,8 +9,8 @@ export const Container = styled(Animated.View)`
   justify-content: space-between;
   z-index: 15;
 
-  background-color: ${({ theme }) => theme.colors.background};
-  border-color: ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.cream};
+  border-color: ${({ theme }) => theme.colors.mint};
   border-top-width: 1px;
   min-height: ${({ baseHeight }) => baseHeight}px;
 
@@ -39,7 +39,7 @@ export const Badge = styled.View`
   padding-horizontal: 4px;
   justify-content: center;
   align-items: center;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
+  border-radius: 999px;
   background-color: ${({ theme }) => theme.colors.danger};
   z-index: 25;
 `;

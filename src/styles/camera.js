@@ -3,7 +3,7 @@ import { DEFAULT_PADDING } from "@/components/layout-constants";
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.cream};
   padding: ${DEFAULT_PADDING}px;
 `;
 

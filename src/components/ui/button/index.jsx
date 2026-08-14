@@ -33,9 +33,11 @@ export const Button = ({
           size: 18,
           color: S.getButtonTextColor(variant, theme),
         })}
-      <S.ButtonText variant={variant} loading={loading}>
-        {children}
-      </S.ButtonText>
+      {children && (
+        <S.ButtonText variant={variant} loading={loading} fontWeight="semibold">
+          {children}
+        </S.ButtonText>
+      )}
       {loading && <S.Loader variant={variant} loading={loading} />}
     </S.Container>
   );

@@ -22,7 +22,7 @@ export const Header = () => {
           </Text>
         )}
       </S.Greeting>
-      <Text fontSize="sm" color={theme.colors.mutedForeground}>
+      <Text color={theme.colors.stone}>
         Este é o seu primeiro acesso. Por segurança, defina uma nova senha para
         continuar.
       </Text>
