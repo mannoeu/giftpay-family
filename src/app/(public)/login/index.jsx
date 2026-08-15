@@ -1,4 +1,4 @@
-import { LoginBrand } from "@/components/brand";
+import { LargeBrand } from "@/components/brand";
 import { Layout } from "./_components/Layout";
 import { Form } from "./_components/Form";
 import { Support } from "./_components/Support";
@@ -6,7 +6,7 @@ import { Support } from "./_components/Support";
 export default function LoginScreen() {
   return (
     <Layout>
-      <LoginBrand />
+      <LargeBrand />
       <Form />
       <Support />
     </Layout>

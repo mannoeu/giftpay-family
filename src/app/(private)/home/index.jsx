@@ -1,22 +1,13 @@
 import { Text } from "react-native";
 
-import { Button } from "@/components/ui/button";
-import { useTabBarBottomPadding } from "@/hooks/useTabBarBottomPadding";
-import { handleLogout } from "@/sdk/session";
-import * as S from "./_components/styles";
+import { Layout } from "./_components/Layout";
+import { TopHeader } from "./_components/TopHeader";
 
 export default function HomeScreen() {
-  const paddingBottom = useTabBarBottomPadding();
-
   return (
-    <S.Container
-      $paddingBottom={paddingBottom}
-      showsVerticalScrollIndicator={false}
-    >
+    <Layout>
+      <TopHeader />
       <Text>Home</Text>
-      <Button variant="outline" onPress={handleLogout}>
-        Sair
-      </Button>
-    </S.Container>
+    </Layout>
   );
 }

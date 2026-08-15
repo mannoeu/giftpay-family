@@ -36,7 +36,7 @@ const BrandMark = ({ variant }) => {
   );
 };
 
-export const LoginBrand = () => {
+export const LargeBrand = () => {
   const theme = useTheme();
 
   return (
@@ -51,7 +51,7 @@ export const LoginBrand = () => {
   );
 };
 
-export const FirstAccessBrand = () => {
+export const SmallBrand = () => {
   return (
     <S.Container $variant="inline">
       <BrandMark variant="inline" />
