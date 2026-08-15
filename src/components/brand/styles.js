@@ -1,15 +1,16 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  flex-direction: ${({ $variant }) => ($variant === "inline" ? "row" : "column")};
+  flex-direction: ${({ $variant }) =>
+    $variant === "inline" ? "row" : "column"};
   align-items: center;
   gap: ${({ $variant }) => ($variant === "inline" ? "10px" : "12px")};
 `;
 
 export const LogoMark = styled.View`
-  width: ${({ $variant }) => ($variant === "inline" ? 44 : 56)}px;
-  height: ${({ $variant }) => ($variant === "inline" ? 44 : 56)}px;
-  border-radius: 16px;
+  width: ${({ $variant }) => ($variant === "inline" ? 32 : 56)}px;
+  height: ${({ $variant }) => ($variant === "inline" ? 32 : 56)}px;
+  border-radius: ${({ $variant }) => ($variant === "inline" ? 8 : 16)}px;
   background-color: ${({ theme }) => theme.colors.teal};
   align-items: center;
   justify-content: center;

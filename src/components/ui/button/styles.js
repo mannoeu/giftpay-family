@@ -26,19 +26,24 @@ const buttonVariants = {
   `,
 };
 
+const MIN_BUTTON_HEIGHT = 44;
+
 const buttonSizes = {
   default: css`
     padding: 8px 16px;
+    min-height: ${MIN_BUTTON_HEIGHT}px;
   `,
   sm: css`
     padding: 16px 12px;
+    min-height: ${MIN_BUTTON_HEIGHT}px;
   `,
   lg: css`
     padding: 20px 16px;
+    min-height: ${MIN_BUTTON_HEIGHT}px;
   `,
   icon: css`
-    width: 48px;
-    height: 48px;
+    width: ${MIN_BUTTON_HEIGHT}px;
+    height: ${MIN_BUTTON_HEIGHT}px;
     justify-content: center;
     align-items: center;
   `,

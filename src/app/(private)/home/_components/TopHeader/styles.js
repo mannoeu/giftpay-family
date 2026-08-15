@@ -6,3 +6,9 @@ export const Container = styled.View`
   align-items: center;
   gap: 16px;
 `;
+
+export const Actions = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+`;

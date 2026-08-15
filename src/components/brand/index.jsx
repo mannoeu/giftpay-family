@@ -12,21 +12,21 @@ const BrandMark = ({ variant }) => {
     <>
       <S.LogoMark $variant={variant}>
         <Gift
-          size={isInline ? 20 : 28}
+          size={isInline ? 16 : 28}
           color={theme.colors.white}
           strokeWidth={2}
         />
       </S.LogoMark>
       <S.Title $variant={variant}>
         <Text
-          fontSize={isInline ? "lg" : "xxl"}
+          fontSize={isInline ? "md" : "xxl"}
           fontWeight="bold"
           textAlign={isInline ? undefined : "center"}
         >
           GiftPay{" "}
         </Text>
         <Text
-          fontSize={isInline ? "lg" : "xxl"}
+          fontSize={isInline ? "md" : "xxl"}
           textAlign={isInline ? undefined : "center"}
         >
           Família
