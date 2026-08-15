@@ -106,6 +106,16 @@ describe("resolveAuthRedirect", () => {
       }),
     ).toBeNull();
   });
+
+  it("não redireciona autenticado com segments vazios", () => {
+    expect(
+      resolveAuthRedirect({
+        isAuthenticated: true,
+        isFirstAccess: false,
+        segments: [],
+      }),
+    ).toBeNull();
+  });
 });
 
 describe("resolveInitialHref", () => {

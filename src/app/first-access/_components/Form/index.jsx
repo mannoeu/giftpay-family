@@ -8,7 +8,7 @@ import { Field } from "@/components/field";
 import { Button } from "@/components/ui/button";
 import { InputPassword } from "@/components/ui/input";
 import { firstAccessFormScheme } from "@/zodSchemes";
-import { PasswordRules } from "./PasswordRules";
+import { PasswordRules } from "../PasswordRules";
 import * as S from "./styles";
 
 const formScheme = firstAccessFormScheme();

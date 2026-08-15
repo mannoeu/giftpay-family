@@ -39,6 +39,6 @@ export const resolveAuthRedirect = ({
     return null;
   }
 
-  if (inPublic || inFirstAccess || !root) return AuthRoutes.home;
+  if (inPublic || inFirstAccess) return AuthRoutes.home;
   return null;
 };

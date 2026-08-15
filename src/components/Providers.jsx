@@ -9,12 +9,18 @@ import * as Network from "expo-network";
 
 import { SheetRoot } from "@/components/sheets";
 import { ToastsRoot } from "@/sdk/toast";
+import { usePushNotificationIdentitySync } from "@/hooks/usePushNotificationIdentitySync";
 import { queryClient } from "@/services/queryClient";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
 export { queryClient } from "@/services/queryClient";
+
+function PushNotificationProviders() {
+  usePushNotificationIdentitySync();
+  return null;
+}
 
 export const Providers = ({ children }) => {
   const theme = useTheme();
@@ -38,6 +44,7 @@ export const Providers = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <PushNotificationProviders />
       <GestureHandlerRootView
         style={{
           flex: 1,

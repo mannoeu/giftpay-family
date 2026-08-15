@@ -1,15 +1,15 @@
 import { useTabBarBottomPadding } from "@/hooks/useTabBarBottomPadding";
-import { Container } from "./styles";
+import * as S from "./styles";
 
 export const Layout = ({ children }) => {
   const paddingBottom = useTabBarBottomPadding();
 
   return (
-    <Container
+    <S.Container
       $paddingBottom={paddingBottom}
       showsVerticalScrollIndicator={false}
     >
       {children}
-    </Container>
+    </S.Container>
   );
 };

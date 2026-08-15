@@ -86,11 +86,20 @@ export function initPushNotificationService() {
 
   if (!initialized) return;
 
-  if (registeredHandlers) {
-    getPushAdapter().registerProviderHandlers(registeredHandlers);
+  reapplyRegisteredHandlers();
+  flushTagsToProvider();
+}
+
+function reapplyRegisteredHandlers() {
+  if (
+    !registeredHandlers ||
+    !isPushNotificationSupported() ||
+    !initialized
+  ) {
+    return;
   }
 
-  flushTagsToProvider();
+  getPushAdapter().registerProviderHandlers(registeredHandlers);
 }
 
 function ensurePushNotificationServiceInitialized() {
@@ -266,6 +275,7 @@ export function pushNotificationLogin(externalUserId) {
   if (!externalUserId) return;
   if (isPushNotificationSupported() && initialized) {
     getPushAdapter().providerLogin(externalUserId);
+    reapplyRegisteredHandlers();
   }
 }
 
@@ -312,6 +322,7 @@ export function pushNotificationLogout() {
   clearTags();
   if (isPushNotificationSupported() && initialized) {
     getPushAdapter().providerLogout();
+    reapplyRegisteredHandlers();
   }
 }
 

@@ -1,26 +1,34 @@
 import { useEffect } from "react";
 
 import { useAuthStore } from "@/store/auth";
+import { useUserQuery } from "@/queries/user";
 import {
   addEmail,
   addTags,
   pushNotificationLogin,
 } from "@/sdk/push-notification";
 
-/**
- * Sincroniza identidade do usuário autenticado com o OneSignal.
- * Chame dentro de um componente que só renderiza quando há sessão.
- */
 export const usePushNotificationIdentitySync = () => {
   const token = useAuthStore((state) => state.token);
   const isAuthenticated = !!token?.access_token;
 
+  const { data: user, isReady: userReady } = useUserQuery({
+    enabled: isAuthenticated,
+  });
+
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    // Substitua pelos dados do usuário autenticado quando disponíveis.
-    // Exemplo: pushNotificationLogin(user.onesignal_uuid);
-    //          addEmail(user.email);
-    //          addTags({ uuid: user.onesignal_uuid });
-  }, [isAuthenticated]);
+    const uuid = user?.extra_data?.onesignal_uuid ?? "";
+    const email = user?.email ?? "";
+
+    pushNotificationLogin(uuid);
+    addEmail(email);
+    addTags({ uuid });
+  }, [
+    isAuthenticated,
+    user?.extra_data?.onesignal_uuid,
+    user?.email,
+    userReady,
+  ]);
 };

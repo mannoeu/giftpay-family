@@ -9,6 +9,8 @@ export {
   isPublicPushRoute,
 } from "@/sdk/push-notification/schedule/navigation";
 
+export { flushPendingPushWhenReady } from "@/sdk/push-notification/schedule/flush";
+
 export {
   clearPendingOpenSheet,
   hasPendingOpenSheet,

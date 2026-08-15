@@ -20,7 +20,9 @@ export function flushPendingOpenSheet() {
   if (!pendingContent) return false;
   if (!isAuthenticated()) return false;
 
-  useSheet.getState().openSheet(pendingContent);
+  const opened = useSheet.getState().openSheet(pendingContent);
+  if (!opened) return false;
+
   pendingContent = null;
   return true;
 }
