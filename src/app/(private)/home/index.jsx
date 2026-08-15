@@ -1,10 +1,11 @@
 import { usePushNotificationPermissionPrompt } from "@/hooks/usePushNotificationPermissionPrompt";
 
-import { Text } from "@/components/ui/text";
 import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
+
 import { Layout } from "./_components/Layout";
 import { TopHeader } from "./_components/TopHeader";
-import { Members } from "./_components/Members";
+import { Dependents } from "./_components/Dependents";
+import { FamilyWallet } from "./_components/FamilyWallet";
 
 export default function HomeScreen() {
   usePushNotificationPermissionPrompt();
@@ -15,10 +16,10 @@ export default function HomeScreen() {
         <TopHeader />
       </SafeHorizontalPadding>
 
-      <Members />
+      <Dependents />
 
       <SafeHorizontalPadding>
-        <Text>Home</Text>
+        <FamilyWallet />
       </SafeHorizontalPadding>
     </Layout>
   );

@@ -12,14 +12,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Text } from "@/components/ui/text";
 import * as S from "./styles";
 
-export const MemberAvatar = ({ color, letter, label, size = "lg" }) => (
+export const UserAvatar = ({ color, letter, label, size = "lg" }) => (
   <S.Circle $color={color} $size={size}>
     {letter ? <S.CircleLetter $size={size}>{letter}</S.CircleLetter> : null}
     {label ? <S.CircleLabel $size={size}>{label}</S.CircleLabel> : null}
   </S.Circle>
 );
 
-export const MemberAvatarButton = ({
+export const UserAvatarButton = ({
   color,
   name,
   label,
@@ -43,7 +43,7 @@ export const MemberAvatarButton = ({
     <S.ButtonWrapper onPress={onPress} {...rest}>
       <S.AvatarRingWrapper $size={size}>
         <S.AvatarRing $size={size} style={ringStyle} />
-        <MemberAvatar
+        <UserAvatar
           color={color ?? theme.colors.tealDeep}
           letter={label ? undefined : name?.charAt(0).toUpperCase()}
           label={label}
@@ -55,7 +55,7 @@ export const MemberAvatarButton = ({
   );
 };
 
-export const MemberAvatarButtonSkeleton = ({ name, size = "lg" }) => (
+export const UserAvatarButtonSkeleton = ({ name, size = "lg" }) => (
   <S.ButtonWrapper disabled>
     <S.AvatarRingWrapper $size={size}>
       <Skeleton
@@ -68,7 +68,7 @@ export const MemberAvatarButtonSkeleton = ({ name, size = "lg" }) => (
   </S.ButtonWrapper>
 );
 
-export const MemberAvatarAdd = ({ onPress, ...rest }) => {
+export const UserAvatarAdd = ({ onPress, ...rest }) => {
   const theme = useTheme();
 
   return (
