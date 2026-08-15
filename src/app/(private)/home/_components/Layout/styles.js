@@ -8,7 +8,7 @@ export const Container = styled.ScrollView.attrs(
     contentContainerStyle: {
       flexGrow: 1,
       backgroundColor: theme.colors.cream,
-      paddingHorizontal: DEFAULT_PADDING,
+      //paddingHorizontal: DEFAULT_PADDING,
       paddingTop: 8,
       paddingBottom: $paddingBottom ?? 32,
       gap: 24,

@@ -8,9 +8,9 @@ export const Container = styled.View`
 `;
 
 export const LogoMark = styled.View`
-  width: ${({ $variant }) => ($variant === "inline" ? 32 : 56)}px;
-  height: ${({ $variant }) => ($variant === "inline" ? 32 : 56)}px;
-  border-radius: ${({ $variant }) => ($variant === "inline" ? 8 : 16)}px;
+  width: ${({ $variant }) => ($variant === "inline" ? 44 : 56)}px;
+  height: ${({ $variant }) => ($variant === "inline" ? 44 : 56)}px;
+  border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.teal};
   align-items: center;
   justify-content: center;

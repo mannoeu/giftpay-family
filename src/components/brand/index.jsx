@@ -12,7 +12,7 @@ const BrandMark = ({ variant }) => {
     <>
       <S.LogoMark $variant={variant}>
         <Gift
-          size={isInline ? 16 : 28}
+          size={isInline ? 20 : 28}
           color={theme.colors.white}
           strokeWidth={2}
         />
