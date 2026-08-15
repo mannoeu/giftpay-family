@@ -1,8 +1,10 @@
+import { MIN_PASSWORD_LENGTH } from "@/zodSchemes/constants";
+
 export const PASSWORD_RULES = [
   {
     id: "minLength",
-    label: "Ao menos 8 caracteres",
-    test: (password) => password.length >= 8,
+    label: `Ao menos ${MIN_PASSWORD_LENGTH} caracteres`,
+    test: (password) => password.length >= MIN_PASSWORD_LENGTH,
   },
   {
     id: "lower",
@@ -22,7 +24,13 @@ export const PASSWORD_RULES = [
   {
     id: "special",
     label: "Ao menos 1 caractere especial",
-    test: (password) => /[^A-Za-z0-9]/.test(password),
+    test: (password) => /[^A-Za-z0-9\s]/.test(password),
+  },
+  {
+    id: "noEdgeSpaces",
+    label: "Não iniciar ou finalizar com espaços",
+    test: (password) =>
+      !/^\s/.test(password ?? "") && !/\s$/.test(password ?? ""),
   },
 ];
 

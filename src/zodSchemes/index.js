@@ -1,8 +1,10 @@
 import { z } from "zod";
 
-const MIN_PASSWORD_LENGTH = 8;
-const MIN_NAME_LENGTH = 3;
-const CONFIRMATION_CODE_LENGTH = 6;
+import {
+  MIN_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  CONFIRMATION_CODE_LENGTH,
+} from "./constants";
 
 const startOrEndWithBlankSpace = (value) =>
   !/^\s/.test(value) && !/\s$/.test(value);

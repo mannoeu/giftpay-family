@@ -12,9 +12,9 @@ Como o app **consome** a API. Os componentes nunca tocam axios direto — tudo p
 | Queries (leitura) | `queries/<dominio>.js` | hooks `useQuery`/`useInfiniteQuery`, desembrulham `data`, expõem `isReady` |
 | Mutations (escrita) | `mutations/<acao>.js` | hooks `useMutation`; consumidos via `mutate()` + callbacks |
 | Enum de query keys | `queries/@config.js` | `QueryKeys` + helper `Time(min)` |
-| Paginação | `sdk/api.js` | `convertPageToOffset`, `getNextPageParam` (⚠️ **não** é o cliente HTTP) |
-| Feedback de erro | `sdk/apiErrors.js` | classe `Feedback` + `createFeedback` (offline/500/404/403/400-401/genérico) |
-| Toast | `sdk/toast.js` | `ToastSuccess/ToastError/ToastInfo` (mobile only) |
+| Paginação | `sdk/api` | `convertPageToOffset`, `getNextPageParam` (⚠️ **não** é o cliente HTTP) |
+| Feedback de erro | `sdk/apiErrors` | classe `Feedback` + `createFeedback` (offline/500/404/403/400-401/genérico) |
+| Toast | `sdk/toast` | `ToastSuccess/ToastError/ToastInfo` (mobile only) |
 
 ## `services/api.js` — a instância única
 
@@ -33,7 +33,7 @@ Como o app **consome** a API. Os componentes nunca tocam axios direto — tudo p
 
 > Consequência prática: **na maioria dos casos você não dispara toast de erro manualmente** — o interceptor já criou `error.feedback` e (se `notify`) já emitiu. No `onError`, chame `error.feedback?.dispatch()` para re-emitir/garantir, ou trate um status específico. Para silenciar, mande `headers: { silent: true }` no controller.
 
-## `sdk/apiErrors.js` — o padrão `Feedback`
+## `sdk/apiErrors` — o padrão `Feedback`
 
 `createFeedback` inspeciona rede + status e devolve um `Feedback` (`title`, `messages`, `formMessages`, `dispatch()`):
 

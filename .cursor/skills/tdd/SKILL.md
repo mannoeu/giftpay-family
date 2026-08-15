@@ -132,9 +132,9 @@ it("formata 0 como R$ 0,00", () => {
   expect(Formatter.currency(0)).toBe("R$ 0,00");
 });
 ```
-**Verifique o RED** → `npx jest src/sdk/formatter.test.js -t "formata 0"` (vê falhar).
+**Verifique o RED** → `npx jest src/sdk/formatter/test.js -t "formata 0"` (vê falhar).
 **GREEN** → conserte o `Formatter.currency`.
-**Verifique o GREEN** → `npx jest src/sdk/formatter.test.js`.
+**Verifique o GREEN** → `npx jest src/sdk/formatter/test.js`.
 **SUÍTE INTEIRA** → `npm test`.
 
 ## Checklist de verificação

@@ -24,7 +24,7 @@ controller/*  →  queries/* (leitura) + mutations/* (escrita)  →  tela (app/)
 2. **`queries/*`** (leitura) e **`mutations/*`** (escrita) — hooks **react-query** que chamam o controller, **desembrulham o `data`** e expõem estado. Toda **query key é constante** em `queries/@config.js` (`QueryKeys`) — nunca string solta inline; com argumento vira **array** (`[QueryKeys.getUserDetails, { userId }]`).
 3. **Tela/componente** — consome só os hooks.
 
-`services/api.js` (interceptors) cuida sozinho de: injeção do bearer token via `useAuthStore`, retry de 401 via refresh token (`services/refreshToken.js`), e criação de `error.feedback` (toast automático de erro via `sdk/apiErrors.js`, salvo header `silent: true`).
+`services/api.js` (interceptors) cuida sozinho de: injeção do bearer token via `useAuthStore`, retry de 401 via refresh token (`services/refreshToken.js`), e criação de `error.feedback` (toast automático de erro via `sdk/apiErrors`, salvo header `silent: true`).
 
 Esqueletos copiáveis de cada camada: @references/layer-patterns.md · Visão detalhada da camada de rede: @references/api-architecture.md
 
@@ -42,7 +42,7 @@ Esqueletos copiáveis de cada camada: @references/layer-patterns.md · Visão de
 | Estado de feature/UI | store zustand em `src/store/<dominio>.js` |
 | Wizard multi-step cross-cutting | `src/context/*.jsx` (Context API) |
 | Validação | schema zod em `src/zodSchemes/` (ou junto da feature) |
-| Enum/formatter/validator de domínio | `src/sdk/*` |
+| Enum/formatter/validator de domínio | `src/sdk/<modulo>/index.js` (+ `test.js`) |
 | Estilo de layout de tela | `src/styles/<tela>.js` (styled-components) |
 | Texto | string pt-BR hardcoded |
 
@@ -126,7 +126,7 @@ npx jest path/to/File.test.js   # um arquivo
 npx jest -t "nome do teste"     # por nome
 ```
 
-Testes colocados como `*.test.js` ao lado do código, `@testing-library/react-native` para componentes/hooks. Use `createTestQueryClient()` de `@/test/queryClient` para hooks react-query (nunca `new QueryClient()` inline).
+Testes colocados ao lado do código (`*.test.js`, ou `sdk/<modulo>/test.js`), `@testing-library/react-native` para componentes/hooks. Use `createTestQueryClient()` de `@/test/queryClient` para hooks react-query (nunca `new QueryClient()` inline).
 
 ## Referências
 

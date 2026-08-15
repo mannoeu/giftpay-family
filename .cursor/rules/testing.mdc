@@ -1,12 +1,12 @@
 ---
 description: Testes — Jest + Testing Library, teste a lógica não o render
-globs: src/**/*.test.js,src/**/*.test.jsx,src/test/**
+globs: src/**/*.test.js,src/**/*.test.jsx,src/**/test.js,src/**/test.jsx,src/test/**
 alwaysApply: false
 ---
 
 # Testes
 
-Stack: **Jest** (preset `jest-expo`) + `@testing-library/react-native`. Testes colocados como `*.test.js` ao lado do código. Toda lógica nova/tocada deve ter teste; 80% de cobertura é alvo aspiracional (sem gate rígido hoje).
+Stack: **Jest** (preset `jest-expo`) + `@testing-library/react-native`. Testes colocados ao lado do código (`*.test.js`; no `sdk/`, `sdk/<modulo>/test.js`). Toda lógica nova/tocada deve ter teste; 80% de cobertura é alvo aspiracional (sem gate rígido hoje).
 
 ## Teste a lógica, não o render
 

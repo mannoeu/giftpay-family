@@ -14,7 +14,7 @@ export const Header = () => {
     <S.Header>
       <S.Greeting>
         <Text fontSize="xl" fontWeight="bold">
-          {firstName ? "Bem vinda, " : "Bem vinda!"}
+          {firstName ? "Bem vindo(a), " : "Bem vindo(a)!"}
         </Text>
         {!!firstName && (
           <Text fontSize="xl" fontWeight="bold" color={theme.colors.teal}>

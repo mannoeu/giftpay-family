@@ -38,7 +38,7 @@ npx jest -t "nome"              # por nome do teste
 - **Navegação**: **expo-router** (file-based) em `src/app/`, grupos `(public)`/`(private)`.
 - **Tema**: sempre light — sem dark mode. Tokens nomeados pela cor visual: `teal`, `tealDeep`, `mint`, `terracotta`, `gold`, `cream`, `charcoal`, `stone`.
 - **Fontes**: Outfit (Light, Regular, SemiBold, Bold).
-- **Erro/observabilidade**: interceptor em `services/api.js` → `error.feedback` (ver `sdk/apiErrors.js`) + toast mobile (`sdk/toast.js`).
+- **Erro/observabilidade**: interceptor em `services/api.js` → `error.feedback` (ver `sdk/apiErrors`) + toast mobile (`sdk/toast`).
 
 ## Layout de pastas (`src/`, importado pelo alias único `@/*`)
 
@@ -48,7 +48,7 @@ O único alias é `@/*` → `./src/*` (definido em `jsconfig.json`; Metro/Expo r
 - `controller/` — camada HTTP: funções finas sobre o axios (uma por domínio, `*.controller.js`); barrel namespaced em `controller/index.js`. Único ponto de troca mock ↔ backend.
 - `queries/` — hooks react-query de **leitura**. Query keys são constantes em `queries/@config.js` (`QueryKeys`) + helper `Time(min)`.
 - `mutations/` — hooks react-query de **escrita** (um por ação).
-- `sdk/` — utilitários de domínio (enums, formatters, validators, regex), `toast`, `storage`, e `api.js` (**paginação**, NÃO o cliente HTTP).
+- `sdk/` — um módulo por pasta (`sdk/<modulo>/index.js` + `test.js` quando houver teste). Utilitários de domínio (enums, formatters, validators), `toast`, `storage`, e `api` (**paginação**, NÃO o cliente HTTP). Pacotes maiores (ex.: `push-notification/`) seguem o mesmo padrão.
 - `services/` — `api.js` (instância axios + interceptors) e `refreshToken.js`.
 - `store/` — stores **zustand** (auth, sheet, camera, tabBar…).
 - `components/` — UI compartilhada: primitivas em `ui/`, componentes de domínio, pasta-por-componente `Component/index.jsx` + `Component/styles.js`.

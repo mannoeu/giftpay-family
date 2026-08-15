@@ -142,7 +142,7 @@ Toda validação no schema; mensagens são **strings pt-BR**. Predicados puros f
 ```js
 import { z } from "zod";
 
-// predicado puro em sdk/validator.js
+// predicado puro em sdk/validator
 const isValidCPF = (cpf) => { /* lógica */ return true; };
 
 export const cpfScheme = () =>
@@ -242,7 +242,7 @@ Efêmera (sem persist): só `create(immer((set) => ({ ... })))`.
 
 ---
 
-## 8. Teste (colocado, `*.test.js`)
+## 8. Teste (colocado: `*.test.js`, ou `sdk/<modulo>/test.js`)
 
 Teste a **lógica**, não a renderização. Mock só a fronteira `@/services/api`. Cubra toda lógica nova/tocada.
 

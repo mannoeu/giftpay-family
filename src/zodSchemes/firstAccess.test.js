@@ -19,4 +19,18 @@ describe("firstAccessFormScheme", () => {
 
     expect(r.success).toBe(true);
   });
+
+  it("reprova senha com espaço em branco no início ou no fim", () => {
+    const leading = schema.safeParse({ password: " Abc12345!" });
+    const trailing = schema.safeParse({ password: "Abc12345! " });
+
+    expect(leading.success).toBe(false);
+    expect(leading.error.issues[0].message).toBe(
+      "A senha não atende aos requisitos",
+    );
+    expect(trailing.success).toBe(false);
+    expect(trailing.error.issues[0].message).toBe(
+      "A senha não atende aos requisitos",
+    );
+  });
 });

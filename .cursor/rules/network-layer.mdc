@@ -17,7 +17,7 @@ export const getFoo = ({ id }) => api.get(`/main/foo/${id}`);
 export const createFoo = ({ data }) => api.post(`/main/foo`, data);
 ```
 
-- Paginação: use `convertPageToOffset` de `@/sdk/api` (não confunda `sdk/api.js` com o cliente `services/api.js`).
+- Paginação: use `convertPageToOffset` de `@/sdk/api` (não confunda `sdk/api` com o cliente `services/api.js`).
 - Para suprimir o toast automático de erro, passe `headers: { silent: true }`.
 - **Não** faça `try/catch` que engole o erro (some do interceptor).
 
