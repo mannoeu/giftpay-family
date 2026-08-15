@@ -4,7 +4,7 @@ import { ScrollView, View } from "react-native";
 import { Text } from "@/components/ui/text";
 import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
 import { Header } from "@/components/header";
-import { MemberAvatar } from "@/components/ui/userAvatar";
+import { UserAvatar } from "@/components/ui/userAvatar";
 import { useTabBarBottomPadding } from "@/hooks/useTabBarBottomPadding";
 
 export default function DependentScreen() {
@@ -19,7 +19,7 @@ export default function DependentScreen() {
       >
         <SafeHorizontalPadding>
           <View style={{ alignItems: "center", flexDirection: "row", gap: 8 }}>
-            <MemberAvatar size="md" letter="J" color="#557FEA" />
+            <UserAvatar size="md" letter="J" color="#557FEA" />
             <View>
               <Text fontWeight="semibold">João</Text>
               <Text fontSize="sm">Sem cartão vinculado</Text>

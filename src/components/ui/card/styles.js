@@ -7,5 +7,5 @@ export const Container = styled.View`
   border-radius: 16px;
   padding: 16px;
   flex-direction: column;
-  gap: 16px;
+  gap: ${({ $gap }) => $gap ?? 16}px;
 `;

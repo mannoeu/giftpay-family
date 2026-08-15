@@ -1,5 +1,7 @@
 import * as S from "./styles";
 
-export const Card = ({ children, ...rest }) => (
-  <S.Container {...rest}>{children}</S.Container>
+export const Card = ({ children, gap = 16, ...rest }) => (
+  <S.Container $gap={gap} {...rest}>
+    {children}
+  </S.Container>
 );

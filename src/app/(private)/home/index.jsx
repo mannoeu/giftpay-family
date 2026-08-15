@@ -5,7 +5,7 @@ import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
 import { Layout } from "./_components/Layout";
 import { TopHeader } from "./_components/TopHeader";
 import { Dependents } from "./_components/Dependents";
-import { FamilyWallet } from "./_components/FamilyWallet";
+import { Wallet } from "./_components/Wallet";
 
 export default function HomeScreen() {
   usePushNotificationPermissionPrompt();
@@ -19,7 +19,7 @@ export default function HomeScreen() {
       <Dependents />
 
       <SafeHorizontalPadding>
-        <FamilyWallet />
+        <Wallet />
       </SafeHorizontalPadding>
     </Layout>
   );

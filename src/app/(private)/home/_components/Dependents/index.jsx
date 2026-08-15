@@ -22,7 +22,7 @@ export const Dependents = () => {
         {dependents?.map((dependent) => (
           <UserAvatarButton
             key={dependent.id}
-            name={dependent.nome}
+            name={dependent.name}
             color={dependent.color}
             onPress={() => router.push(`/home/dependent/${dependent.id}`)}
           />
