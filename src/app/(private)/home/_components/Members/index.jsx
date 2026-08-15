@@ -1,3 +1,5 @@
+import { useRouter } from "expo-router";
+
 import {
   MemberAvatarAdd,
   MemberAvatarButton,
@@ -7,12 +9,22 @@ import {
 import * as S from "./styles";
 
 export const Members = () => {
+  const router = useRouter();
+
   return (
     <S.Container>
       <S.HorizontalScroll>
         <MemberAvatarButton name="Família" label="Todos" selected disabled />
-        <MemberAvatarButton name="João" color="#557FEA" onPress={() => {}} />
-        <MemberAvatarButton name="Maria" color="#C06990" onPress={() => {}} />
+        <MemberAvatarButton
+          name="João"
+          color="#557FEA"
+          onPress={() => router.push(`/home/dependent/1`)}
+        />
+        <MemberAvatarButton
+          name="Maria"
+          color="#C06990"
+          onPress={() => router.push(`/home/dependent/2`)}
+        />
         <MemberAvatarAdd onPress={() => {}} />
       </S.HorizontalScroll>
     </S.Container>

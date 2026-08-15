@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { useTheme } from "styled-components/native";
 
-export default function HomeLayout() {
+export default function DependentLayout() {
   const theme = useTheme();
 
   return (
@@ -14,10 +14,6 @@ export default function HomeLayout() {
       }}
     >
       <Stack.Screen name="index" />
-      <Stack.Screen
-        name="dependent/[dependentId]"
-        options={{ headerShown: false }}
-      />
     </Stack>
   );
 }

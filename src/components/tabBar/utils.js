@@ -14,7 +14,7 @@ export function getBadgeMargin(value) {
  * Rotas que devem ocultar a TabBar.
  * Adicione pathnames aqui conforme novas sub-rotas forem criadas em (private)/.
  */
-export const pathnamesToHideTabs = [];
+export const pathnamesToHideTabs = ["/home/dependent/[dependentId]"];
 
 /**
  * Verifica se um pathname deve esconder as tabs, incluindo rotas dinâmicas
