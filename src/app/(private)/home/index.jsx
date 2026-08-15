@@ -15,7 +15,9 @@ export default function HomeScreen() {
       <SafeHorizontalPadding>
         <TopHeader />
       </SafeHorizontalPadding>
+
       <Members />
+
       <SafeHorizontalPadding>
         <Text>Home</Text>
       </SafeHorizontalPadding>

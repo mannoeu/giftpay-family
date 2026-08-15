@@ -15,3 +15,9 @@ export const HorizontalScroll = styled.ScrollView.attrs((p) => ({
     paddingHorizontal: DEFAULT_PADDING,
   },
 }))``;
+
+export const SkeletonContainer = styled.View`
+  flex-direction: row;
+  gap: 8px;
+  padding-horizontal: ${DEFAULT_PADDING}px;
+`;

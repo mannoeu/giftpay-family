@@ -1,6 +1,7 @@
 import {
   MemberAvatarAdd,
   MemberAvatarButton,
+  MemberAvatarButtonSkeleton,
 } from "@/components/ui/memberAvatar";
 
 import * as S from "./styles";
@@ -17,3 +18,17 @@ export const Members = () => {
     </S.Container>
   );
 };
+
+export const MembersSkeleton = () => (
+  <S.Container>
+    <S.SkeletonContainer>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <MemberAvatarButtonSkeleton
+          key={`member-skeleton-${index}`}
+          name
+          size="lg"
+        />
+      ))}
+    </S.SkeletonContainer>
+  </S.Container>
+);

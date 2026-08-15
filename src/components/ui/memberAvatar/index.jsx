@@ -8,6 +8,7 @@ import {
   withTiming,
 } from "react-native-reanimated";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { Text } from "@/components/ui/text";
 import * as S from "./styles";
 
@@ -53,6 +54,19 @@ export const MemberAvatarButton = ({
     </S.ButtonWrapper>
   );
 };
+
+export const MemberAvatarButtonSkeleton = ({ name, size = "lg" }) => (
+  <S.ButtonWrapper disabled>
+    <S.AvatarRingWrapper $size={size}>
+      <Skeleton
+        width={S.CIRCLE_SIZES[size]}
+        height={S.CIRCLE_SIZES[size]}
+        rounded="full"
+      />
+    </S.AvatarRingWrapper>
+    {name ? <Skeleton width={36} height={10} rounded="4px" /> : null}
+  </S.ButtonWrapper>
+);
 
 export const MemberAvatarAdd = ({ onPress, ...rest }) => {
   const theme = useTheme();
