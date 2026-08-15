@@ -1,40 +1,12 @@
 import styled from "styled-components/native";
 import { DEFAULT_PADDING } from "@/components/layout-constants";
 
-export const Container = styled.ScrollView.attrs(({ theme }) => ({
-  keyboardShouldPersistTaps: "handled",
-  alwaysBounceVertical: false,
-  contentContainerStyle: {
-    flexGrow: 1,
-    backgroundColor: theme.colors.cream,
-    paddingHorizontal: DEFAULT_PADDING,
-    paddingVertical: 24,
-    gap: 24,
-  },
-}))`
-  flex: 1;
+export const Container = styled.View`
+  flex-grow: 1;
   width: 100%;
-`;
-
-export const Brand = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-`;
-
-export const LogoMark = styled.View`
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.teal};
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Title = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
+  background-color: ${({ theme }) => theme.colors.cream};
+  padding: 24px ${DEFAULT_PADDING}px;
+  gap: 24px;
 `;
 
 export const Header = styled.View`

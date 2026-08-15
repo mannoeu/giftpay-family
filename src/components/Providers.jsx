@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useTheme } from "styled-components/native";
-import {
-  onlineManager,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { onlineManager, QueryClientProvider } from "@tanstack/react-query";
 import { Platform } from "react-native";
 
 import * as Network from "expo-network";
@@ -15,6 +12,7 @@ import { ToastsRoot } from "@/sdk/toast";
 import { queryClient } from "@/services/queryClient";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
 export { queryClient } from "@/services/queryClient";
 
@@ -25,7 +23,7 @@ export const Providers = ({ children }) => {
     const networkSubscriber = Network.addNetworkStateListener(
       ({ isConnected }) => {
         onlineManager.setOnline(isConnected);
-      }
+      },
     );
 
     return () => {
@@ -48,8 +46,10 @@ export const Providers = ({ children }) => {
       >
         <StatusBar style="dark" />
         <ToastsRoot />
-        {children}
-        <SheetRoot />
+        <KeyboardProvider>
+          {children}
+          <SheetRoot />
+        </KeyboardProvider>
       </GestureHandlerRootView>
     </QueryClientProvider>
   );

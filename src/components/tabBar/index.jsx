@@ -40,7 +40,7 @@ export const TabBar = ({ state, descriptors, navigation }) => {
         () => {
           setIsVisible(true);
         },
-        Platform.OS === "android" ? 500 : 450
+        Platform.OS === "android" ? 500 : 450,
       );
     }
 
@@ -62,7 +62,7 @@ export const TabBar = ({ state, descriptors, navigation }) => {
           left: 0,
           right: 0,
           zIndex: 10,
-          backgroundColor: theme.colors.cream,
+          backgroundColor: theme.colors.white,
           height: TOTAL_HEIGHT,
         },
         animatedStyle,
@@ -75,8 +75,8 @@ export const TabBar = ({ state, descriptors, navigation }) => {
             options.tabBarLabel !== undefined
               ? options.tabBarLabel
               : options.title !== undefined
-              ? options.title
-              : route.name;
+                ? options.title
+                : route.name;
 
           if (["_sitemap", "+not-found"].includes(route.name)) return null;
 
@@ -108,11 +108,7 @@ export const TabBar = ({ state, descriptors, navigation }) => {
               onLongPress={onLongPress}
               isFocused={isFocused}
               routeName={route.name}
-              color={
-                isFocused
-                  ? theme.colors.teal
-                  : theme.colors.stone
-              }
+              color={isFocused ? theme.colors.teal : theme.colors.stone}
               label={label}
               badge={options?.badge}
               renderIcon={options?.tabBarIcon}

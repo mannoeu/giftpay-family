@@ -9,7 +9,7 @@ export const Container = styled(Animated.View)`
   justify-content: space-between;
   z-index: 15;
 
-  background-color: ${({ theme }) => theme.colors.cream};
+  background-color: ${({ theme }) => theme.colors.white};
   border-color: ${({ theme }) => theme.colors.mint};
   border-top-width: 1px;
   min-height: ${({ baseHeight }) => baseHeight}px;

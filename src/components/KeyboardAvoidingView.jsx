@@ -1,19 +1,21 @@
-import {
-  KeyboardAvoidingView as RNKeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useTheme } from "styled-components/native";
+
+import { DEFAULT_PADDING } from "@/components/layout-constants";
 
 export const KeyboardAvoidingView = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <RNKeyboardAvoidingView
+    <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: theme.colors.cream }}
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={48}
+      contentContainerStyle={{ flexGrow: 1 }}
+      keyboardShouldPersistTaps="handled"
+      alwaysBounceVertical={false}
+      bottomOffset={DEFAULT_PADDING}
+      extraKeyboardSpace={DEFAULT_PADDING}
     >
       {children}
-    </RNKeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };

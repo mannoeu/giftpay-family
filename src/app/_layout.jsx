@@ -11,6 +11,7 @@ import { configureReanimatedLogger } from "react-native-reanimated";
 
 import { useAuthStore } from "@/store/auth";
 import { Providers } from "@/components/Providers";
+import { RefreshTokenOverlay } from "@/components/RefreshTokenOverlay";
 import { theme } from "@/theme";
 import { initBugsnag, ErrorBoundary } from "@/sdk/bugsnag";
 import { posthog } from "@/sdk/posthog";
@@ -45,6 +46,7 @@ function AppLayout() {
 
   const token = useAuthStore((state) => state.token);
   const isFirstAccess = useAuthStore((state) => state.isFirstAccess);
+  const isRefreshingToken = useAuthStore((state) => state.isRefreshingToken);
   const isAuthenticated = !!token?.access_token;
 
   usePushNotificationHandlers();
@@ -110,6 +112,7 @@ function AppLayout() {
 
   return (
     <ThemeProvider theme={theme}>
+      {isRefreshingToken && <RefreshTokenOverlay />}
       <Providers>
         <Stack
           screenOptions={{

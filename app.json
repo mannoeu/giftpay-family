@@ -11,6 +11,9 @@
     ],
     "icon": "./src/assets/icons/app-icon.png",
     "userInterfaceStyle": "light",
+    "androidNavigationBar": {
+      "enforceContrast": false
+    },
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
