@@ -17,13 +17,13 @@ export const WalletIconEnum = {
 
 export const WalletColorEnum = {
   [WalletEnum.meal]: {
-    background: "#7CBAF9",
-    foreground: "#71A6DC",
+    background: "#FF945D",
+    foreground: "#E0804E",
     text: "#ffffff",
   },
   [WalletEnum.allowance]: {
-    background: "#FF945D",
-    foreground: "#E0804E",
+    background: "#7CBAF9",
+    foreground: "#71A6DC",
     text: "#ffffff",
   },
 };
