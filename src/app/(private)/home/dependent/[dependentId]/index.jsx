@@ -5,6 +5,7 @@ import { Text } from "@/components/ui/text";
 import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
 import { Header } from "@/components/header";
 import { UserAvatar } from "@/components/ui/userAvatar";
+import { LastActivities } from "@/components/LastActivities";
 import { useTabBarBottomPadding } from "@/hooks/useTabBarBottomPadding";
 
 export default function DependentScreen() {
@@ -25,6 +26,13 @@ export default function DependentScreen() {
               <Text fontSize="sm">Sem cartão vinculado</Text>
             </View>
           </View>
+        </SafeHorizontalPadding>
+
+        <SafeHorizontalPadding>
+          <LastActivities
+            parentId={dependentId}
+            emptyMessage="Faça uma recarga para João usar seu cartão"
+          />
         </SafeHorizontalPadding>
 
         {Array.from({ length: 100 }).map((_, index) => (

@@ -25,7 +25,35 @@ const currency = (value = 0, { forcePositive = false } = {}) => {
   });
 };
 
+const getDate = (d) => {
+  const date = new Date(d);
+
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return {
+    day,
+    month,
+    year,
+    hours,
+    minutes,
+    displayDate: `${day}/${month}/${year}`,
+    displayHour: `${hours}:${minutes}`,
+    displayDateAndTime: `${day}/${month}/${year} às ${hours}:${minutes}`,
+  };
+};
+
+const getDateAndTimeString = (d) => {
+  const { day, month, year, hours, minutes } = getDate(d);
+  return `${day}/${month}/${year} às ${hours}:${minutes}`;
+};
+
 export const Formatter = {
   cpf,
   currency,
+  getDate,
+  getDateAndTimeString,
 };

@@ -1,6 +1,7 @@
 import { usePushNotificationPermissionPrompt } from "@/hooks/usePushNotificationPermissionPrompt";
 
 import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
+import { LastActivities } from "@/components/LastActivities";
 
 import { Layout } from "./_components/Layout";
 import { TopHeader } from "./_components/TopHeader";
@@ -20,6 +21,10 @@ export default function HomeScreen() {
 
       <SafeHorizontalPadding>
         <Wallet />
+      </SafeHorizontalPadding>
+
+      <SafeHorizontalPadding>
+        <LastActivities emptyMessage="Faça uma recarga para começar a usar os cartões" />
       </SafeHorizontalPadding>
     </Layout>
   );
