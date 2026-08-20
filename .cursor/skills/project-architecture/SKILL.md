@@ -36,7 +36,8 @@ Esqueletos copiáveis de cada camada: @references/layer-patterns.md · Visão de
 | Hook de leitura | `src/queries/<dominio>.js` |
 | Hook de escrita | `src/mutations/<acao>.js` |
 | Nova query key | `src/queries/@config.js` (`QueryKeys`) |
-| Tela / rota | `src/app/(public\|private)/...` (**expo-router**, file-based) |
+| Tela / rota | `src/app/(public\|private)/...` (**expo-router**, file-based). **Só** arquivos de rota (`index.jsx`, `_layout.jsx`, `[param].jsx`). |
+| UI exclusiva da tela | `src/screenComponents/<nome-da-rota>/` — o nome da pasta é o segmento da rota (não o grupo): `home/` → `screenComponents/home/`; `login/` → `screenComponents/login/`; `first-access/` → `screenComponents/first-access/`; `dependent/[id]` → `screenComponents/dependent/`. **Nunca** `_components` dentro de `src/app/` (vira rota). |
 | Componente compartilhado | `src/components/<Component>/index.jsx` + `styles.js` |
 | Primitiva de UI base | já existe em `src/components/ui/*` — **reutilize, não recrie** |
 | Estado de feature/UI | store zustand em `src/store/<dominio>.js` |
@@ -88,7 +89,7 @@ Tokens nomeados pela aparência visual do hex, não por papel semântico:
 - **Mutations: `mutation.mutate(vars, { onSuccess, onError })`** — callbacks por chamada (navegar, `error.feedback?.dispatch()`, `setError`). O hook segura só efeitos sempre-on (invalidar cache, toast de sucesso). **NUNCA `mutateAsync` + try/catch** (racing) — inegociável; encadeie disparando a próxima no `onSuccess` da anterior.
 - **Erro de API**: o interceptor normalmente já dispara o toast (via `error.feedback`). No `onError`, use `error.feedback?.dispatch()` ou trate status específico (ex.: `error.response?.status === 404`). Para suprimir o toast automático, passe `headers: { silent: true }` no controller.
 - **Ícones**: `lucide-react-native`. `@expo/vector-icons` só onde já usado.
-- **Navegação**: expo-router (`router.push/replace`, `<Link href>`, `useLocalSearchParams`) — nunca API de navegação de outra lib. Tela nova = arquivo em `src/app/...`.
+- **Navegação**: expo-router (`router.push/replace`, `<Link href>`, `useLocalSearchParams`) — nunca API de navegação de outra lib. Tela nova = arquivo em `src/app/...`. UI exclusiva da tela = `src/screenComponents/<nome-da-rota>/`.
 - **Config/env**: `process.env.EXPO_PUBLIC_*` (ex.: `EXPO_PUBLIC_API_BASE_URL`).
 - **Sheets**: bottom sheets via `@gorhom/bottom-sheet` orquestradas por `@/store/sheet` (`openSheet(<XSheet/>)`/`closeSheet()`).
 - **Toasts**: `ToastSuccess`, `ToastError`, `ToastInfo` de `@/sdk/toast`.
@@ -101,7 +102,7 @@ Tokens nomeados pela aparência visual do hex, não por papel semântico:
 4. **Query key** nova em `queries/@config.js`.
 5. **Store zustand** (se a feature tem estado próprio de passos/seleção) ou **Context** (wizard).
 6. **Lógica do componente/tela** — `react-hook-form`, handlers que chamam `mutate()` com callbacks.
-7. **Montagem da UI** por último, com primitivas de `components/ui/*` + `styled-components` + textos pt-BR.
+7. **Montagem da UI** por último, com primitivas de `components/ui/*` + `styled-components` + textos pt-BR. UI exclusiva da tela em `src/screenComponents/<nome-da-rota>/`; o arquivo de rota em `src/app/` só monta esses pedaços.
 
 ## Sinais vermelhos — PARE
 
@@ -111,6 +112,7 @@ Tokens nomeados pela aparência visual do hex, não por papel semântico:
 - Componente chamando controller direto, pulando o hook react-query.
 - Dado de servidor duplicado num store zustand em vez de react-query.
 - Recriar uma primitiva que já existe em `components/ui/*`.
+- Componente, hook ou `styles.js` dentro de `src/app/` (vira rota no Expo Router). Use `src/screenComponents/<nome-da-rota>/`.
 - Import relativo `../../` onde o alias `@/` resolve.
 - `StyleSheet` novo quando styled-components serve; objeto de estilo inline recriado a cada render.
 - Montar a UI antes de a camada de dados existir e estar testada.

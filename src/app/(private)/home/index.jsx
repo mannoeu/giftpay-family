@@ -3,10 +3,10 @@ import { usePushNotificationPermissionPrompt } from "@/hooks/usePushNotification
 import { SafeHorizontalPadding } from "@/components/ui/safe-horizontal-padding";
 import { LastActivities } from "@/components/LastActivities";
 
-import { Layout } from "./_components/Layout";
-import { TopHeader } from "./_components/TopHeader";
-import { Dependents } from "./_components/Dependents";
-import { Wallet } from "./_components/Wallet";
+import { Layout } from "@/screenComponents/home/Layout";
+import { TopHeader } from "@/screenComponents/home/TopHeader";
+import { Dependents } from "@/screenComponents/home/Dependents";
+import { Wallet } from "@/screenComponents/home/Wallet";
 
 export default function HomeScreen() {
   usePushNotificationPermissionPrompt();

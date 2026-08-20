@@ -44,7 +44,8 @@ npx jest -t "nome"              # por nome do teste
 
 O único alias é `@/*` → `./src/*` (definido em `jsconfig.json`; Metro/Expo resolve; o Jest usa `moduleNameMapper`). **Nunca use `../../`** quando o `@/` resolve.
 
-- `app/` — telas + roteamento (**expo-router**). Grupos `(public)` e `(private)`, layouts `_layout.jsx`, rotas dinâmicas `[param].jsx`.
+- `app/` — **só** telas + roteamento (**expo-router**). Grupos `(public)` e `(private)`, layouts `_layout.jsx`, rotas dinâmicas `[param].jsx`. Nada de componente/estilo colocalizado aqui (o Expo Router trata todo arquivo em `app/` como rota).
+- `screenComponents/` — UI exclusiva de uma tela. A pasta espelha o **nome da rota** (`src/app/(private)/home/` → `src/screenComponents/home/`; se a rota se chama `signin`, a pasta é `signin/`). Pasta-por-componente `Component/index.jsx` + `styles.js`.
 - `controller/` — camada HTTP: funções finas sobre o axios (uma por domínio, `*.controller.js`); barrel namespaced em `controller/index.js`. Único ponto de troca mock ↔ backend.
 - `queries/` — hooks react-query de **leitura**. Query keys são constantes em `queries/@config.js` (`QueryKeys`) + helper `Time(min)`.
 - `mutations/` — hooks react-query de **escrita** (um por ação).
@@ -80,7 +81,7 @@ Os interceptors de `services/api.js` cuidam de: injeção do bearer token (`useA
 - **Validação** nos schemas zod (`@/zodSchemes` ou junto da feature). Mensagens são **strings pt-BR** — mantenha o padrão do repo.
 - **Erro de API**: normalmente o interceptor já dispara o toast; no `onError` use `error.feedback?.dispatch()` (ou trate status específico). Para suprimir o toast automático, mande header `silent: true` no controller.
 - **UI**: reutilize as primitivas de `@/components/ui/*`; não recrie. Estilo com `styled-components/native` + tokens do `theme`. Ícones via `lucide-react-native`.
-- **Navegação**: expo-router (`router.push/replace`, `<Link href>`, `useLocalSearchParams`) — tela nova = arquivo em `src/app/...`.
+- **Navegação**: expo-router (`router.push/replace`, `<Link href>`, `useLocalSearchParams`) — tela nova = arquivo em `src/app/...`; UI exclusiva da tela = `src/screenComponents/<nome-da-rota>/`.
 - **Config/env**: `process.env.EXPO_PUBLIC_*` (ex.: `EXPO_PUBLIC_API_BASE_URL`).
 - **Chaves de storage persistido**: `@giftpay-family/<nome>`.
 

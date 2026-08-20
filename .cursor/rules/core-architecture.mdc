@@ -27,7 +27,7 @@ controller/*  →  queries/* (leitura) + mutations/* (escrita)  →  tela (app/)
 - **Validação em zod** (`@/zodSchemes` ou junto da feature); mensagens em pt-BR (padrão do repo).
 - **UI**: reutilize primitivas de `@/components/ui/*`; estilo com `styled-components/native` + tokens do `theme`; ícones `lucide-react-native`.
 - **Import por alias `@/*`** — nunca `../../` quando o alias resolve.
-- **Navegação**: expo-router (`router.push/replace`, `<Link>`, `useLocalSearchParams`); tela nova = arquivo em `src/app/...`.
+- **Navegação**: expo-router (`router.push/replace`, `<Link>`, `useLocalSearchParams`); tela nova = arquivo em `src/app/...`. UI exclusiva da tela = `src/screenComponents/<nome-da-rota>/` (nunca `_components` em `app/`).
 - **Estado**: servidor → react-query; feature/UI → zustand; cross-cutting → Context.
 - **Env**: `process.env.EXPO_PUBLIC_*`.
 - **Chaves de storage**: `@giftpay-family/<nome>`.

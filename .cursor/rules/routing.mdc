@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Roteamento — expo-router (file-based)
 
-As telas vivem em `src/app/`. O nome do arquivo é a rota. App full mobile — **sem web**.
+As telas vivem em `src/app/`. O nome do arquivo é a rota. App full mobile — **sem web**. **Não coloque componentes, hooks ou `styles.js` em `src/app/`** — o Expo Router trata cada arquivo como rota.
 
 ## Estrutura
 
@@ -51,6 +51,7 @@ const { id } = useLocalSearchParams();
 ## Telas
 
 - Tela nova = novo arquivo dentro do grupo/stack certo (declare no `_layout.jsx` quando o navegador lista as `Stack.Screen`).
+- UI exclusiva da tela = `src/screenComponents/<nome-da-rota>/` (mesmo nome do segmento da rota, sem o grupo). Importe com `@/screenComponents/home/Wallet`.
 - A tela consome **hooks** de `queries/`/`mutations/` — nada de `api`/axios direto.
 - Textos em pt-BR hardcoded (padrão do repo). Estilos de tela em `@/styles/<tela>` ou styled-components locais.
 - Respeite safe area/insets e teclado; considere back button do Android em fluxos com passos.

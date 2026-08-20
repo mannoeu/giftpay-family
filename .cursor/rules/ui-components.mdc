@@ -1,6 +1,6 @@
 ---
 description: UI — componentes próprios, styled-components, tema, ícones lucide
-globs: src/components/**,src/styles/**/*.js,src/theme/**
+globs: src/components/**,src/screenComponents/**,src/styles/**/*.js,src/theme/**
 alwaysApply: false
 ---
 
@@ -13,6 +13,9 @@ Reutilize as primitivas do repo antes de criar UI nova: `Button`, `Input`, `Inpu
 ## Pasta-por-componente
 
 `ComponentName/index.jsx` (JSX) + `ComponentName/styles.js` (styled-components). Primitivas simples podem ser arquivo flat (`ui/text.js`). Importe estilos como `import * as S from "./styles"`.
+
+- **Compartilhado** (2+ telas) → `src/components/<Component>/`
+- **Exclusivo de uma tela** → `src/screenComponents/<nome-da-rota>/<Component>/` (o nome da pasta é o segmento da rota: `home`, `login`, `first-access`, `dependent`). **Nunca** coloque isso em `src/app/` — o Expo Router registra o arquivo como rota.
 
 ```jsx
 import { useTheme } from "styled-components/native";

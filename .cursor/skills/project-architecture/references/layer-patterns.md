@@ -161,7 +161,7 @@ Regras compostas / entre campos → `superRefine` com `ctx.addIssue({ code: z.Zo
 
 ---
 
-## 6. Formulário com react-hook-form + zod (tela em `src/app/`)
+## 6. Formulário com react-hook-form + zod (em `src/screenComponents/<rota>/`)
 
 ```jsx
 import { useForm, Controller } from "react-hook-form";

@@ -63,6 +63,25 @@ const { id } = useLocalSearchParams();
 
 Tela nova = novo arquivo no grupo/stack certo; declare no `_layout.jsx` quando o navegador lista as telas.
 
+## UI exclusiva da tela — `src/screenComponents/<rota>/`
+
+O Expo Router trata **todo arquivo** em `src/app/` como rota. Componentes, layouts de tela e `styles.js` **não** ficam em `_components` dentro de `app/`.
+
+A pasta em `screenComponents` usa o **nome da rota** (o segmento do arquivo/pasta, sem grupos `(public)`/`(private)`):
+
+| Rota | Pasta |
+| --- | --- |
+| `src/app/(private)/home/` | `src/screenComponents/home/` |
+| `src/app/(public)/login/` | `src/screenComponents/login/` |
+| `src/app/first-access/` | `src/screenComponents/first-access/` |
+| `src/app/(private)/home/dependent/[dependentId]/` | `src/screenComponents/dependent/` |
+
+Se a rota se chama `signin` (e não `login`), a pasta é `src/screenComponents/signin/`.
+
+Pasta-por-componente: `Wallet/index.jsx` + `Wallet/styles.js`. Importe com o alias: `import { Wallet } from "@/screenComponents/home/Wallet"`.
+
+Componente usado em **mais de uma tela** continua em `src/components/`.
+
 ## Anatomia de uma tela
 
 - A tela é um componente default-export no arquivo de rota.
