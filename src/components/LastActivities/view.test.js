@@ -1,4 +1,5 @@
-import { getLastActivitiesView, getExtractHref } from "./view";
+import { getLastActivitiesView, getExtractHref, applyActivitiesShortcutFilter } from "./view";
+import { useActivitiesFilterStore } from "@/store/activitiesFilter";
 
 describe("getLastActivitiesView", () => {
   it("retorna loading quando loading é true", () => {
@@ -47,11 +48,31 @@ describe("getLastActivitiesView", () => {
 });
 
 describe("getExtractHref", () => {
-  it("aponta para o extrato da família quando parentId é omitido", () => {
-    expect(getExtractHref()).toBe("/home/extrato");
+  it("aponta para a tab Atividades quando parentId é omitido", () => {
+    expect(getExtractHref()).toBe("/activities");
   });
 
-  it("aponta para o extrato do dependente quando parentId é informado", () => {
-    expect(getExtractHref(1)).toBe("/home/dependent/1/extrato");
+  it("aponta para a tab Atividades quando parentId é informado", () => {
+    expect(getExtractHref(1)).toBe("/activities");
+  });
+});
+
+describe("applyActivitiesShortcutFilter", () => {
+  beforeEach(() => {
+    useActivitiesFilterStore.getState().reset();
+  });
+
+  it("no atalho da home limpa o filtro para a família", () => {
+    useActivitiesFilterStore.getState().setParentId(2);
+
+    applyActivitiesShortcutFilter();
+
+    expect(useActivitiesFilterStore.getState().parentId).toBeNull();
+  });
+
+  it("no atalho do filho aplica o parentId no filtro", () => {
+    applyActivitiesShortcutFilter(1);
+
+    expect(useActivitiesFilterStore.getState().parentId).toBe(1);
   });
 });

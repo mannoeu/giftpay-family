@@ -35,4 +35,26 @@ describe("TransactionController.getTransactions", () => {
 
     expect(res.data.every((item) => item.parent.id === 1)).toBe(true);
   });
+
+  it("pagina os resultados quando page é informado", async () => {
+    const page1 = await flushMock(getTransactions({ page: 1, pageSize: 2 }));
+
+    expect(page1.data.results).toHaveLength(2);
+    expect(page1.data.count).toBeGreaterThan(2);
+    expect(page1.data.previous).toBeNull();
+    expect(page1.data.next).toContain("offset=2");
+    expect(page1.data.next).toContain("limit=2");
+  });
+
+  it("filtra por parentId e pagina o recorte", async () => {
+    const page1 = await flushMock(
+      getTransactions({ parentId: 1, page: 1, pageSize: 10 }),
+    );
+
+    expect(page1.data.results.length).toBeGreaterThan(0);
+    expect(
+      page1.data.results.every((item) => item.parent.id === 1),
+    ).toBe(true);
+    expect(page1.data.count).toBeGreaterThanOrEqual(page1.data.results.length);
+  });
 });

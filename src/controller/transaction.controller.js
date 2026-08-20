@@ -1,45 +1,53 @@
-const MOCK_TRANSACTIONS = [
+import { buildPaginatedResponse } from "@/sdk/api";
+
+const TRANSACTION_TEMPLATES = [
   {
-    id: 1,
     direction: "out",
     status: "approved",
     title: "Compra aprovada",
     subtitle: "Em Livraria XPTO",
     amount: "15.00",
-    created_at: "2026-04-20T16:30:00.000Z",
     parent: { id: 1, name: "João", color: "#557FEA" },
   },
   {
-    id: 2,
     direction: "out",
     status: "denied",
     title: "Compra negada",
     subtitle: "Em Livraria XPTO",
     amount: "15.00",
-    created_at: "2026-04-20T16:30:00.000Z",
     parent: { id: 1, name: "João", color: "#557FEA" },
   },
   {
-    id: 3,
     direction: "in",
     status: "approved",
     title: "Recarga realizada",
     subtitle: "Carteira Lanche",
     amount: "50.00",
-    created_at: "2026-04-20T16:30:00.000Z",
     parent: { id: 2, name: "Maria", color: "#C06990" },
   },
   {
-    id: 4,
     direction: "out",
     status: "approved",
     title: "Compra aprovada",
     subtitle: "Em Padaria Central",
     amount: "8.50",
-    created_at: "2026-04-19T15:00:00.000Z",
     parent: { id: 2, name: "Maria", color: "#C06990" },
   },
 ];
+
+const MOCK_COUNT = 40;
+
+const MOCK_TRANSACTIONS = Array.from({ length: MOCK_COUNT }, (_, index) => {
+  const template = TRANSACTION_TEMPLATES[index % TRANSACTION_TEMPLATES.length];
+  const day = 20 - Math.floor(index / TRANSACTION_TEMPLATES.length);
+
+  return {
+    ...template,
+    id: index + 1,
+    created_at: `2026-04-${String(Math.max(day, 1)).padStart(2, "0")}T16:30:00.000Z`,
+    parent: { ...template.parent },
+  };
+});
 
 const filterTransactionsByParent = (transactions, parentId) => {
   if (parentId == null || parentId === "") return transactions;
@@ -49,11 +57,22 @@ const filterTransactionsByParent = (transactions, parentId) => {
   );
 };
 
-export const getTransactions = ({ parentId } = {}) =>
+export const getTransactions = ({ parentId, page, pageSize = 20 } = {}) =>
   new Promise((resolve) => {
     setTimeout(() => {
+      const items = filterTransactionsByParent(MOCK_TRANSACTIONS, parentId);
+
+      if (page == null) {
+        resolve({ data: items });
+        return;
+      }
+
       resolve({
-        data: filterTransactionsByParent(MOCK_TRANSACTIONS, parentId),
+        data: buildPaginatedResponse(items, {
+          page,
+          pageSize,
+          path: "https://api.local/transactions",
+        }),
       });
     }, 1500);
   });

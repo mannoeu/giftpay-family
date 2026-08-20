@@ -1,3 +1,5 @@
+import { useActivitiesFilterStore } from "@/store/activitiesFilter";
+
 export const LastActivitiesView = {
   loading: "loading",
   error: "error",
@@ -12,7 +14,10 @@ export const getLastActivitiesView = ({ loading, error, data } = {}) => {
   return LastActivitiesView.data;
 };
 
-export const getExtractHref = (parentId) => {
-  if (parentId == null || parentId === "") return "/home/extrato";
-  return `/home/dependent/${parentId}/extrato`;
+export const ACTIVITIES_HREF = "/activities";
+
+export const getExtractHref = () => ACTIVITIES_HREF;
+
+export const applyActivitiesShortcutFilter = (parentId) => {
+  useActivitiesFilterStore.getState().setParentId(parentId ?? null);
 };

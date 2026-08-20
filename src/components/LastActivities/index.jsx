@@ -15,6 +15,7 @@ import {
   getLastActivitiesView,
   LastActivitiesView,
   getExtractHref,
+  applyActivitiesShortcutFilter,
 } from "./view";
 import * as S from "./styles";
 
@@ -62,7 +63,9 @@ const ErrorContent = ({ retry, errorMessage }) => (
         {errorMessage}
       </Text>
     ) : null}
-    <Button variant="outline" icon={<RefreshCw />} onPress={retry}></Button>
+    <Button variant="outline" icon={<RefreshCw />} onPress={retry}>
+      Tentar novamente
+    </Button>
   </S.ErrorState>
 );
 
@@ -83,12 +86,12 @@ const ActivitiesList = ({ data }) =>
     </Fragment>
   ));
 
-const SeeMore = ({ href }) => {
+const SeeMore = ({ href, onPress }) => {
   const theme = useTheme();
 
   return (
     <S.Footer>
-      <Link href={href}>
+      <Link href={href} onPress={onPress}>
         <Text
           fontSize="sm"
           decoration="underline"
@@ -140,7 +143,10 @@ export const LastActivities = ({
       </S.Body>
 
       {view === LastActivitiesView.data ? (
-        <SeeMore href={getExtractHref(parentId)} />
+        <SeeMore
+          href={getExtractHref()}
+          onPress={() => applyActivitiesShortcutFilter(parentId)}
+        />
       ) : null}
     </Card>
   );

@@ -8,14 +8,15 @@ import { TransactionController } from "@/controller";
 import { Formatter } from "@/sdk/formatter";
 
 import { LastActivities } from "./index";
+import { useActivitiesFilterStore } from "@/store/activitiesFilter";
 
 jest.mock("expo-router", () => {
   const React = require("react");
   const { Text } = require("react-native");
 
   return {
-    Link: ({ href, children }) =>
-      React.createElement(Text, { href }, children),
+    Link: ({ href, onPress, children }) =>
+      React.createElement(Text, { href, onPress }, children),
   };
 });
 
@@ -61,6 +62,7 @@ describe("LastActivities", () => {
   beforeEach(() => {
     jest.useRealTimers();
     jest.clearAllMocks();
+    useActivitiesFilterStore.getState().reset();
   });
 
   afterEach(() => {
@@ -159,10 +161,24 @@ describe("LastActivities", () => {
       getByText(`+${Formatter.currency(50, { forcePositive: true })}`),
     ).toBeTruthy();
     expect(getByText("Ver mais")).toBeTruthy();
-    expect(getByText("Ver mais").parent.props.href).toBe("/home/extrato");
+    expect(getByText("Ver mais").parent.props.href).toBe("/activities");
   });
 
-  it("aponta Ver mais para o extrato do dependente quando parentId é informado", async () => {
+  it("ao tocar Ver mais na home, limpa o filtro da tab Atividades", async () => {
+    useActivitiesFilterStore.getState().setParentId(9);
+    TransactionController.getTransactions.mockResolvedValue({
+      data: [apiItem],
+    });
+
+    const { getByText } = await renderLastActivities(<LastActivities />);
+
+    await waitFor(() => expect(getByText("Ver mais")).toBeTruthy());
+    fireEvent.press(getByText("Ver mais"));
+
+    expect(useActivitiesFilterStore.getState().parentId).toBeNull();
+  });
+
+  it("ao tocar Ver mais no perfil do filho, aplica o filtro do filho", async () => {
     TransactionController.getTransactions.mockResolvedValue({
       data: [apiItem],
     });
@@ -172,8 +188,9 @@ describe("LastActivities", () => {
     );
 
     await waitFor(() => expect(getByText("Ver mais")).toBeTruthy());
-    expect(getByText("Ver mais").parent.props.href).toBe(
-      "/home/dependent/1/extrato",
-    );
+    expect(getByText("Ver mais").parent.props.href).toBe("/activities");
+    fireEvent.press(getByText("Ver mais"));
+
+    expect(useActivitiesFilterStore.getState().parentId).toBe(1);
   });
 });

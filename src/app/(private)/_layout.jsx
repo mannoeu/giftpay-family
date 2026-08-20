@@ -8,7 +8,7 @@ import { useTheme } from "styled-components/native";
 
 import { TabBar } from "@/components/tabBar";
 
-import { HomeIcon } from "@/components/tabBar/tabBarIcons";
+import { HomeIcon, ActivitiesIcon } from "@/components/tabBar/tabBarIcons";
 
 export default function PrivateLayout() {
   const theme = useTheme();
@@ -38,6 +38,13 @@ export default function PrivateLayout() {
           options={{
             tabBarLabel: "Início",
             tabBarIcon: HomeIcon,
+          }}
+        />
+        <Tabs.Screen
+          name="activities"
+          options={{
+            tabBarLabel: "Atividades",
+            tabBarIcon: ActivitiesIcon,
           }}
         />
       </Tabs>

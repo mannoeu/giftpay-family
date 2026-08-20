@@ -119,4 +119,29 @@ describe("useLastActivitiesQuery", () => {
       },
     ]);
   });
+
+  it("limita as últimas atividades a 5 itens", async () => {
+    TransactionController.getTransactions.mockResolvedValue({
+      data: Array.from({ length: 6 }, (_, index) => ({
+        ...apiItem,
+        id: index + 1,
+        title: `Item ${index + 1}`,
+      })),
+    });
+
+    const { result } = await renderHook(() => useLastActivitiesQuery(), {
+      wrapper,
+    });
+
+    await waitFor(() => expect(result.current.isReady).toBe(true));
+
+    expect(result.current.data).toHaveLength(5);
+    expect(result.current.data.map((item) => item.title)).toEqual([
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+    ]);
+  });
 });
