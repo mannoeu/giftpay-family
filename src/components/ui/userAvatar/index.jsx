@@ -26,6 +26,7 @@ export const UserAvatarButton = ({
   onPress,
   size = "lg",
   selected = false,
+  showName = true,
   ...rest
 }) => {
   const theme = useTheme();
@@ -50,7 +51,7 @@ export const UserAvatarButton = ({
           size={size}
         />
       </S.AvatarRingWrapper>
-      <Text fontSize="xs">{name}</Text>
+      {showName ? <Text fontSize="xs">{name}</Text> : null}
     </S.ButtonWrapper>
   );
 };

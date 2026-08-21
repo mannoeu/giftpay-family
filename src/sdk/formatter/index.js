@@ -4,6 +4,10 @@ const cpf = (value) => {
   return toPattern(value, "999.999.999-99");
 };
 
+const birthDate = (value) => {
+  return toPattern(value, "99/99/9999");
+};
+
 const currency = (value = 0, { forcePositive = false } = {}) => {
   if (value === null || value === undefined || isNaN(value)) return "-";
 
@@ -53,6 +57,7 @@ const getDateAndTimeString = (d) => {
 
 export const Formatter = {
   cpf,
+  birthDate,
   currency,
   getDate,
   getDateAndTimeString,

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { isFutureDate, parseCalendarDate } from "@/sdk/dependent";
+
 import {
   MIN_PASSWORD_LENGTH,
   MIN_NAME_LENGTH,
@@ -72,46 +74,30 @@ export const nameScheme = () =>
       message: `Mínimo de ${MIN_NAME_LENGTH} caracteres`,
     });
 
+const addCalendarDateIssues = (value, ctx) => {
+  const parsed = parseCalendarDate(value);
+
+  if (!parsed.ok) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message:
+        parsed.reason === "nonexistent"
+          ? "A data informada não existe"
+          : "Data inválida",
+    });
+    return null;
+  }
+
+  return parsed.date;
+};
+
 export const birthDateSchema = () =>
   z
     .string()
     .trim()
     .superRefine((value, ctx) => {
-      const [dayStr, monthStr, yearStr] = value.split("/");
-      const day = Number(dayStr);
-      const month = Number(monthStr);
-      const year = Number(yearStr);
-
-      if (
-        isNaN(day) ||
-        isNaN(month) ||
-        isNaN(year) ||
-        day < 1 ||
-        day > 31 ||
-        month < 1 ||
-        month > 12 ||
-        year < 1900
-      ) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Data inválida",
-        });
-        return;
-      }
-
-      const birthDate = new Date(year, month - 1, day);
-
-      if (
-        birthDate.getFullYear() !== year ||
-        birthDate.getMonth() !== month - 1 ||
-        birthDate.getDate() !== day
-      ) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "A data informada não existe",
-        });
-        return;
-      }
+      const birthDate = addCalendarDateIssues(value, ctx);
+      if (!birthDate) return;
 
       const today = new Date();
 
@@ -133,6 +119,30 @@ export const birthDateSchema = () =>
       }
     });
 
+export const childBirthDateSchema = () =>
+  z
+    .string()
+    .trim()
+    .superRefine((value, ctx) => {
+      if (!value) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Campo obrigatório",
+        });
+        return;
+      }
+
+      const birthDate = addCalendarDateIssues(value, ctx);
+      if (!birthDate) return;
+
+      if (isFutureDate(birthDate)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "A data não pode ser no futuro",
+        });
+      }
+    });
+
 export const emailScheme = () =>
   z.string().trim().email({ message: "E-mail inválido" });
 
@@ -142,3 +152,4 @@ export const confirmationCodeScheme = () =>
   });
 
 export { firstAccessFormScheme } from "./firstAccess";
+export { addDependentFormScheme } from "./addDependent";

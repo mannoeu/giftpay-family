@@ -30,3 +30,9 @@ describe("Formatter.getDateAndTimeString", () => {
     expect(Formatter.getDateAndTimeString(date)).toBe("20/04/2026 às 13:30");
   });
 });
+
+describe("Formatter.birthDate", () => {
+  it("aplica a máscara 99/99/9999", () => {
+    expect(Formatter.birthDate("23052014")).toBe("23/05/2014");
+  });
+});

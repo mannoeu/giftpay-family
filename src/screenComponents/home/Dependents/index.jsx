@@ -6,11 +6,14 @@ import {
   UserAvatarButtonSkeleton,
 } from "@/components/ui/userAvatar";
 import { useDependentsQuery } from "@/queries/dependents";
+import { AddDependentSheet } from "@/screenComponents/home/AddDependentSheet";
+import { useSheet } from "@/store/sheet";
 
 import * as S from "./styles";
 
 export const Dependents = () => {
   const router = useRouter();
+  const openSheet = useSheet((state) => state.openSheet);
   const { data: dependents, isReady } = useDependentsQuery();
 
   if (!isReady) return <DependentsSkeleton />;
@@ -27,7 +30,7 @@ export const Dependents = () => {
             onPress={() => router.push(`/home/dependent/${dependent.id}`)}
           />
         ))}
-        <UserAvatarAdd onPress={() => {}} />
+        <UserAvatarAdd onPress={() => openSheet(<AddDependentSheet />)} />
       </S.HorizontalScroll>
     </S.Container>
   );
