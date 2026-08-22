@@ -21,11 +21,14 @@ export const Transaction = ({
   icon: Icon,
   letter,
   color,
+  titleColor,
+  valueColor: valueColorOverride,
   ...rest
 }) => {
   const resolvedVariant = resolveTransactionVariant(variant);
   const theme = useTheme();
   const valueColor =
+    valueColorOverride ??
     theme.colors[getTransactionValueColorToken(resolvedVariant)];
 
   return (
@@ -39,9 +42,14 @@ export const Transaction = ({
       </S.IconCircle>
 
       <S.TextGroup>
-        <Text fontSize="sm" fontWeight="bold">
+        <S.Title
+          fontSize="sm"
+          fontWeight="bold"
+          color={titleColor}
+          $color={titleColor}
+        >
           {title}
-        </Text>
+        </S.Title>
         {subtitle ? (
           <Text fontSize="xs" color={theme.colors.stone}>
             {subtitle}
@@ -55,9 +63,14 @@ export const Transaction = ({
       </S.TextGroup>
 
       <S.Value>
-        <Text fontSize="sm" fontWeight="semibold" color={valueColor}>
+        <S.Amount
+          fontSize="sm"
+          fontWeight="semibold"
+          color={valueColor}
+          $color={valueColor}
+        >
           {formatTransactionValue(value, resolvedVariant)}
-        </Text>
+        </S.Amount>
       </S.Value>
     </S.Container>
   );

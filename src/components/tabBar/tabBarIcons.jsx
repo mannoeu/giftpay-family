@@ -24,8 +24,18 @@ const BELL_PATHS = [
   "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326",
 ];
 
+const LANDMARK_PATHS = [
+  "M3 22h18",
+  "M6 18v-7",
+  "M10 18v-7",
+  "M14 18v-7",
+  "M18 18v-7",
+  "M12 2 20 7H4z",
+];
+
 const HOUSE_PATH_LENGTH = 68;
 const BELL_PATH_LENGTH = 64;
+const LANDMARK_PATH_LENGTH = 48;
 
 const DrawnPath = ({ d, color, pathLength, progress }) => {
   const animatedProps = useAnimatedProps(() => ({
@@ -95,5 +105,13 @@ export const ActivitiesIcon = (props) => (
     {...props}
     paths={BELL_PATHS}
     pathLength={BELL_PATH_LENGTH}
+  />
+);
+
+export const DepositsIcon = (props) => (
+  <AnimatedStrokeIcon
+    {...props}
+    paths={LANDMARK_PATHS}
+    pathLength={LANDMARK_PATH_LENGTH}
   />
 );

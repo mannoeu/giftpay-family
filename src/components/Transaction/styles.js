@@ -25,6 +25,14 @@ export const Letter = styled(Text)`
   flex-shrink: 0;
 `;
 
+export const Title = styled(Text)`
+  color: ${({ $color, theme }) => $color || theme.colors.charcoal};
+`;
+
+export const Amount = styled(Text)`
+  color: ${({ $color, theme }) => $color || theme.colors.charcoal};
+`;
+
 export const TextGroup = styled.View`
   flex: 1;
   gap: 2px;
