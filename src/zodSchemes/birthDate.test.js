@@ -1,7 +1,7 @@
-import { birthDateSchema, childBirthDateSchema } from "@/zodSchemes";
+import { birthDateSchema, parentBirthDateSchema } from "@/zodSchemes";
 
-describe("childBirthDateSchema", () => {
-  const schema = childBirthDateSchema();
+describe("parentBirthDateSchema", () => {
+  const schema = parentBirthDateSchema();
 
   it("aceita 23/05/2014", () => {
     expect(schema.safeParse("23/05/2014").success).toBe(true);

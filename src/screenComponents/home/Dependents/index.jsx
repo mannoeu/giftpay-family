@@ -6,7 +6,7 @@ import {
   UserAvatarButtonSkeleton,
 } from "@/components/ui/userAvatar";
 import { useDependentsQuery } from "@/queries/dependents";
-import { AddDependentSheet } from "@/screenComponents/home/AddDependentSheet";
+import { AddDependentSheet } from "@/components/sheets/addDependentSheet";
 import { useSheet } from "@/store/sheet";
 
 import * as S from "./styles";

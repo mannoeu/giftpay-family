@@ -1,11 +1,13 @@
 import { z } from "zod";
 
 import { AVATAR_COLORS } from "@/sdk/dependent";
-import { childBirthDateSchema, nameScheme } from "./index";
+
+import { parentBirthDateSchema } from "./birthDate";
+import { nameScheme } from "./name";
 
 export const addDependentFormScheme = () =>
   z.object({
     name: nameScheme(),
-    birthDate: childBirthDateSchema(),
+    birthDate: parentBirthDateSchema(),
     color: z.enum(AVATAR_COLORS),
   });
