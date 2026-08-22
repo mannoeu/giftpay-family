@@ -59,7 +59,7 @@ export const AddDependentSheet = () => {
     mutate(
       { data: buildCreateDependentPayload(values) },
       {
-        onSuccess: ({ data: dependent }) => {
+        onSuccess: (dependent) => {
           setDependent(dependent);
           setStep("success");
         },
