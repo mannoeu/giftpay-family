@@ -38,4 +38,5 @@ export const FilterButton = styled.TouchableOpacity.attrs({
   border: 1px solid ${({ theme }) => theme.colors.mint};
   border-radius: 100px;
   flex-shrink: 1;
+  max-width: 160px;
 `;

@@ -67,6 +67,7 @@ export const ButtonWrapper = styled.TouchableOpacity.attrs({
 })`
   align-items: center;
   gap: 2px;
+  max-width: 80px;
 `;
 
 export const AddCircle = styled.View`

@@ -51,7 +51,11 @@ export const UserAvatarButton = ({
           size={size}
         />
       </S.AvatarRingWrapper>
-      {showName ? <Text fontSize="xs">{name}</Text> : null}
+      {showName ? (
+        <Text fontSize="xs" numberOfLines={1}>
+          {name}
+        </Text>
+      ) : null}
     </S.ButtonWrapper>
   );
 };

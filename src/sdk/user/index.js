@@ -1,4 +1,4 @@
-export const getFirstName = (user) => {
-  const raw = user?.first_name || user?.name || "";
+export const getFirstName = (username) => {
+  const raw = username || "";
   return String(raw).trim().split(/\s+/)[0] || "";
 };
