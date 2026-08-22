@@ -8,7 +8,7 @@ import * as S from "./styles";
 export const Header = () => {
   const theme = useTheme();
   const { data: user } = useUserQuery();
-  const firstName = getFirstName(user);
+  const firstName = getFirstName(user?.name);
 
   return (
     <S.Header>

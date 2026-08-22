@@ -9,6 +9,8 @@ import { useDependentsQuery } from "@/queries/dependents";
 import { AddDependentSheet } from "@/components/sheets/addDependentSheet";
 import { useSheet } from "@/store/sheet";
 
+import { getFirstName } from "@/sdk/user";
+
 import * as S from "./styles";
 
 export const Dependents = () => {
@@ -24,10 +26,10 @@ export const Dependents = () => {
         <UserAvatarButton name="Família" label="Todos" selected disabled />
         {dependents?.map((dependent) => (
           <UserAvatarButton
-            key={dependent.id}
-            name={dependent.name}
-            color={dependent.color}
-            onPress={() => router.push(`/home/dependent/${dependent.id}`)}
+            key={dependent?.id}
+            name={dependent?.name}
+            color={dependent?.color}
+            onPress={() => router.push(`/home/dependent/${dependent?.id}`)}
           />
         ))}
         <UserAvatarAdd onPress={() => openSheet(<AddDependentSheet />)} />
