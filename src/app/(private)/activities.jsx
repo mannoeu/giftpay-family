@@ -3,7 +3,7 @@ import { useTabBarBottomPadding } from "@/hooks/useTabBarBottomPadding";
 import { useDependentsQuery } from "@/queries/dependents";
 import { useTransactionsInfiniteQuery } from "@/queries/transactions";
 import { ActivitiesHeader } from "@/screenComponents/activities/Header";
-import { ActivitiesFilterSheet } from "@/screenComponents/activities/FilterSheet";
+import { ActivitiesFilterSheet } from "@/components/sheets/activitiesFilterSheet";
 import { Layout } from "@/screenComponents/activities/Layout";
 import {
   ActivitiesError,
@@ -17,9 +17,6 @@ import {
 } from "@/screenComponents/activities/view";
 import { useActivitiesFilterStore } from "@/store/activitiesFilter";
 import { useSheet } from "@/store/sheet";
-
-const ERROR_MESSAGE =
-  "Por favor, tente novamente. Caso o problema persista, contate o suporte.";
 
 export default function ActivitiesScreen() {
   const paddingBottom = useTabBarBottomPadding();
@@ -67,7 +64,10 @@ export default function ActivitiesScreen() {
 
       {isPending ? <ActivitiesLoadingList /> : null}
       {isError ? (
-        <ActivitiesError retry={refetch} errorMessage={ERROR_MESSAGE} />
+        <ActivitiesError
+          retry={refetch}
+          errorMessage="Por favor, tente novamente. Caso o problema persista, contate o suporte."
+        />
       ) : null}
       {!isPending && !isError ? (
         <ActivitiesList

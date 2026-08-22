@@ -1,37 +1,37 @@
 import { useState } from "react";
 import { Keyboard } from "react-native";
+import { useRouter } from "expo-router";
+
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTheme } from "styled-components/native";
-import { SvgXml } from "react-native-svg";
 
 import { Field } from "@/components/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { UserAvatarButton } from "@/components/ui/userAvatar";
-import { ADD_DEPENDENT_SUCCESS_XML } from "@/assets/images/addDependentSuccessXml";
 import { createDependent } from "@/mutations/createDependent";
-import {
-  AVATAR_COLORS,
-  buildCreateDependentPayload,
-} from "@/sdk/dependent";
+
+import familyImage from "@/assets/images/family.png";
+
+import { AVATAR_COLORS, buildCreateDependentPayload } from "@/sdk/dependent";
 import { Formatter } from "@/sdk/formatter";
 import { useSheet } from "@/store/sheet";
 import { addDependentFormScheme } from "@/zodSchemes";
 
-import { getAddDependentSuccessCopy } from "./view";
 import * as S from "./styles";
 
 const formScheme = addDependentFormScheme();
 
 export const AddDependentSheet = () => {
   const theme = useTheme();
+  const router = useRouter();
   const closeSheet = useSheet((state) => state.closeSheet);
   const { mutate, isPending } = createDependent();
 
   const [step, setStep] = useState("form");
-  const [createdName, setCreatedName] = useState("");
+  const [dependent, setDependent] = useState(null);
 
   const {
     control,
@@ -51,7 +51,6 @@ export const AddDependentSheet = () => {
 
   const name = watch("name");
   const selectedColor = watch("color");
-  const successCopy = getAddDependentSuccessCopy(createdName);
 
   const onSubmit = (values) => {
     Keyboard.dismiss();
@@ -60,32 +59,35 @@ export const AddDependentSheet = () => {
     mutate(
       { data: buildCreateDependentPayload(values) },
       {
-        onSuccess: (dependent) => {
-          setCreatedName(dependent.name);
+        onSuccess: ({ data: dependent }) => {
+          setDependent(dependent);
           setStep("success");
-        },
-        onError: (error) => {
-          error.feedback?.dispatch();
         },
       },
     );
   };
+
+  const navigateToProfile = () => {
+    closeSheet();
+    router.push(`/home/dependent/${dependent?.id}`);
+  };
+
+  // #region: Render
 
   if (step === "success") {
     return (
       <S.Container>
         <S.SuccessContent>
           <Text fontSize="xl" fontWeight="bold" textAlign="center">
-            {successCopy.title}
+            Bem vindo(a) à família, {dependent?.name?.trim()}!
           </Text>
           <Text textAlign="center" color={theme.colors.stone}>
-            {successCopy.body}
+            Agora você precisa vincular um cartão físico e fazer uma recarga
+            para que {dependent?.name?.trim()} comece a usar o app.
           </Text>
         </S.SuccessContent>
 
-        <S.IllustrationWrap>
-          <SvgXml xml={ADD_DEPENDENT_SUCCESS_XML} width={200} height={192} />
-        </S.IllustrationWrap>
+        <S.Image source={familyImage} />
 
         <S.Actions>
           <Button
@@ -96,7 +98,7 @@ export const AddDependentSheet = () => {
           >
             Agora não
           </Button>
-          <Button style={{ flexGrow: 1 }} size="lg" onPress={closeSheet}>
+          <Button style={{ flexGrow: 1 }} size="lg" onPress={navigateToProfile}>
             Ver Perfil
           </Button>
         </S.Actions>
@@ -120,7 +122,7 @@ export const AddDependentSheet = () => {
           {AVATAR_COLORS.map((color) => (
             <UserAvatarButton
               key={color}
-              name={name}
+              name={name?.trim()}
               color={color}
               size="md"
               selected={selectedColor === color}
@@ -179,14 +181,17 @@ export const AddDependentSheet = () => {
         zero. Você poderá vincular um cartão depois.
       </Text>
 
-      <Button
-        size="lg"
-        loading={isPending}
-        disabled={!isValid || isPending}
-        onPress={handleSubmit(onSubmit)}
-      >
-        Cadastrar
-      </Button>
+      <S.Actions>
+        <Button
+          style={{ flexGrow: 1 }}
+          size="lg"
+          loading={isPending}
+          disabled={!isValid || isPending}
+          onPress={handleSubmit(onSubmit)}
+        >
+          Cadastrar
+        </Button>
+      </S.Actions>
     </S.Container>
   );
 };

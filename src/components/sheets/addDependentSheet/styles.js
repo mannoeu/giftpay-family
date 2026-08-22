@@ -32,15 +32,19 @@ export const SuccessContent = styled.View`
   align-items: center;
 `;
 
-export const IllustrationWrap = styled.View`
-  align-items: center;
-  justify-content: center;
-  margin-vertical: 8px;
+export const Image = styled.Image.attrs({
+  resizeMode: "contain",
+})`
+  width: 200px;
+  height: 190px;
+  margin-horizontal: auto;
 `;
 
 export const Actions = styled.View`
-  margin-top: 8px;
+  flex: 1;
   flex-direction: row;
-  align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+
+  margin-top: 16px;
+  gap: 16px;
 `;

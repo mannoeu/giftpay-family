@@ -8,9 +8,9 @@ export const createDependent = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ data }) =>
-      (await DependentController.createDependent({ data })).data,
-    onSuccess: (dependent) => {
+    mutationFn: ({ data }) => DependentController.createDependent({ data }),
+    onSuccess: ({ data: dependent }) => {
+      console.log("dependent", dependent);
       queryClient.setQueryData([QueryKeys.getDependents], (current) =>
         appendDependentToList(current, dependent),
       );
